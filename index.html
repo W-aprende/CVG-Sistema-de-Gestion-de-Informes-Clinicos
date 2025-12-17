@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Sistema de Informes de Laboratorio</title>
+<link rel="icon" href="laboratory_12617359.png" type="image/png">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+  <!-- LOGIN SIMPLE -->
+<div id="loginScreen" style="
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, #f4f8fb, #06cee8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+">
+  <div style="
+    background: rgb(229, 248, 245);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+  ">
+    <center>
+      <img src="LogoPrincipal.png" alt="Logo" style="width:120px;height:99px;object-fit:contain;margin-bottom:10px;">
+      <h2 style="margin:0 0 10px 0;color:#0b3954;">Sistema de Gestion de informes</h2>
+      <p style="margin:0 0 20px 0;color:#6e727b;font-size:14px;">Laboratorio Clínico</p>
+    </center>
+    <form onsubmit="handleLogin(event)">
+      <div style="margin-bottom:16px;">
+        <label style="display:block;font-weight:600;margin-bottom:6px;color:#0b3954;">Usuario</label>
+        <input type="text" id="username" required style="width:100%;padding:12px;border:2px solid #e6eef8;border-radius:8px;font-size:14px;">
+      </div>
+      <div style="margin-bottom:20px;position:relative;">
+        <label style="display:block;font-weight:600;margin-bottom:6px;color:#0b3954;">Contraseña</label>
+        <input type="password" id="password" required style="width:100%;padding:12px 40px 12px 12px;border:2px solid #e6eef8;border-radius:8px;font-size:14px;">
+        <button type="button" onclick="togglePassword()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;"><br><br>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0b3954" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </button>
+      </div>
+      <button type="submit" style="width:100%;padding:12px;background:#0f9d8e;color:white;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Ingresar</button>
+    </form>
+    <p id="loginError" style="color:#dc3545;font-size:13px;margin-top:10px;text-align:center;"></p>
+  </div>
+</div>
+
+<div class="header">
+  <div class="brand">
+    <div class="logo" aria-hidden="true">
+      <img src="LogoPrincipal.png" style="width:100px;height:92px;object-fit:contain;">
+    </div>
+    <div>
+      <div class="title">CLINICA VIRGEN DE GUADALUPE – MALABO</div>
+      <div class="subtitle">Calle Rey Malabo · Tel/fax +240 333 099013</div>
+    </div>
+  </div>
+  <div class="actions">
+    <button id="btnOpenPreview" class="btn" title="Abrir vista previa (a partir de ahí puedes guardar PDF o imprimir)">Abrir vista previa</button>
+    <button id="btnNew" class="btn ghost" title="Limpiar todo y empezar nuevo informe">♻️ Nuevo informe</button>
+    <button id="btnLogout" class="btn danger" title="Cerrar sesión">🚪 Cerrar sesión</button>
+  </div>
+</div>
+<div style="display:none">ID único: ANEWM-222182839</div>
+<div class="container">
+  <div class="grid">
+    <div class="main-col">
+      <div class="card">
+        <center><h1><strong>CREACION DE INFORMES DE LABORATORIO</strong></h1></center><br>
+        <strong>DATOS DEL PACIENTE</strong>
+        <div class="patient" style="margin-top:8px">
+          <input id="p_fecha" type="date" title="Fecha del informe">
+          <input id="p_historial" type="text" placeholder="Nº historial" title="Número de historial">
+          <input id="p_nombre" type="text" placeholder="Nombre completo" title="Nombre del paciente">
+          <input id="p_edad" type="text" placeholder="Edad" title="Edad">
+          <select id="p_sexo" title="Sexo"><option value="">Sexo</option><option value="Masculino">M</option><option value="Femenino">F</option></select>
+          <input id="p_reg" type="text" placeholder="Nº registro" title="Número de registro">
+        </div>
+        <div style="margin-top:12px">
+          <strong>1. SELECCIONA INFORMES DE LABORATORIO</strong>
+          <div style="margin-top:8px;">
+            <input type="text" id="searchReports" placeholder="Buscar informes..." style="width:100%;padding:8px;border-radius:8px;border:1px solid #e6eef8;">
+          </div>
+          <div id="reportsGrid" class="reports-grid"></div>
+          <div class="small" style="margin-top:6px">Los informes no incluidos quedan visibles en segundo plano; actívalos para editar sus secciones.</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <strong>2. SELECCIONA LAS SECCIONES</strong>
+        <div id="sectionsContainer" class="sections"></div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <strong>3. PARRAMETROS</strong>
+        <div id="paramsContainer" class="params"></div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <strong>FIRMA Y EL SELLO</strong>
+          <div class="kv">Selecciona quién firma; la firma se incrustará en el PDF</div>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:10px;flex-wrap:wrap">
+          <select id="professionalSelect" class="select-prof">
+            <option value="FIRMA ANALISTA">FIRMA ANALISTA</option>
+          </select>
+          <input id="professionalTitle" placeholder="Cargo (p.ej. Jefe de laboratorio)" style="padding:8px;border-radius:8px;border:1px solid #e6eef8">
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;margin-top:12px">
+          <div class="signature-box" style="flex:1" id="sigArea">
+            <div class="kv">Sello de Laboratorio</div>
+            <canvas id="sigCanvas" class="sig-canvas" width="400" height="240" style="width:100%;height:auto;max-height:220px;display:block;margin-top:5px"></canvas>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button id="clearSig" class="btn ghost">Borrar</button>
+              <button id="saveSig" class="btn">Guardar</button>
+              <label class="btn ghost" style="display:inline-block;padding:10px 12px;cursor:pointer">
+                🖇️ Adjuntar sello
+                <input id="sigFile" type="file" accept="image/*" style="display:none">
+              </label>
+            </div>
+          </div>
+          <div style="width:300px">
+            <div class="kv">Comentarios / Observaciones</div>
+            <textarea id="finalNotes" rows="6" style="width:100%;padding:8px;border-radius:8px;border:1px solid #e6eef8;margin-top:8px"></textarea>
+            <div class="kv" style="margin-top:8px">Estado: <span id="statusBox">Listo</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="card">
+        <strong>Acciones rápidas</strong>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+          <button id="selectAllSections" class="btn ghost">Seleccionar todas secciones</button>
+          <button id="deselectAllSections" class="btn ghost">Deseleccionar todas secciones</button>          
+          <button id="btnAddReport" class="btn ghost">➕ Añadir informe</button>
+          <button id="btnUpdateReport" class="btn ghost">✏️ Actualizar informe</button>
+          <button id="btnDeleteReport" class="btn danger">🗑️ Eliminar informe</button>
+        </div>
+      </div>
+      <div class="card" style="margin-top:12px">
+        <strong>Plantillas</strong>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+          <button class="btn ghost" onclick="loadTemplate('completo')">📋 Plantilla Emergencia</button>
+          <button class="btn ghost" onclick="loadTemplate('basico')">📄 Plantilla Básica</button>
+          <button class="btn ghost" onclick="saveAsTemplate()">💾 Guardar como Plantilla</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <strong>Vista previa & PDF</strong>
+        <div style="margin-top:10px">
+          <button id="btnOpenPreview2" class="btn">Abrir vista previa</button>
+          <button id="btnSavePDF" class="btn" title="Guardar el informe como PDF en tu equipo">💾</button>
+          <div class="small" style="margin-top:8px">Desde la vista previa usa Imprimir o Guardar como PDF.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal vista previa -->
+<div id="modalPreview" class="modal" role="dialog" aria-hidden="true">
+  <div class="preview-box" role="document">
+    <div class="modal-head">
+      <div>Vista previa</div>
+      <div style="display:flex;gap:8px">
+        <button id="modalPrint" class="btn ghost">🖨️ Imprimir</button>
+        <button id="modalClose" class="btn ghost">Cerrar</button>
+      </div>
+    </div>
+    <iframe id="previewFrame" class="preview-frame" title="Vista previa"></iframe>
+  </div>
+</div>
+
+<!-- MODAL: AÑADIR INFORME -->
+<div id="modalAddReport" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>📋 Nuevo Informe</h2>
+      <button class="modal-close-btn" onclick="closeModal('modalAddReport')">✕</button>
+    </div>
+    <form id="formAddReport" onsubmit="handleAddReport(event)">
+      <div class="form-group">
+        <label>Nombre del Informe *</label>
+        <input type="text" id="addReportTitle" placeholder="ej. BIOQUÍMICA" required>
+        <div class="form-hint">Será visible en la interfaz principal</div>
+      </div>
+
+      <div class="form-group">
+        <label>ID Interno *</label>
+        <input type="text" id="addReportId" placeholder="ej. bioquimica" required>
+        <div class="form-hint">Solo letras y números, sin espacios</div>
+      </div>
+
+      <div class="form-group">
+        <label>Icono (Emoji) *</label>
+        <input type="text" id="addReportIcon" placeholder="ej. 🧪" value="🧪" maxlength="2" required>
+        <div class="form-hint">Pega un emoji aquí</div>
+      </div>
+
+      <div class="form-group">
+        <label>Secciones *</label>
+        <div id="addReportSections"></div>
+        <button type="button" class="btn-add-section" onclick="addSectionField('addReportSections')">➕ Agregar Sección</button>
+      </div>
+
+      <div id="messageAddReport"></div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-modal btn-modal-secondary" onclick="closeModal('modalAddReport')">Cancelar</button>
+        <button type="submit" class="btn-modal btn-modal-primary">Crear Informe</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL: ACTUALIZAR INFORME -->
+<div id="modalUpdateReport" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>✏️ Actualizar Informe</h2>
+      <button class="modal-close-btn" onclick="closeModal('modalUpdateReport')">✕</button>
+    </div>
+    <form id="formUpdateReport" onsubmit="handleUpdateReport(event)">
+      <div class="form-group">
+        <label>Seleccionar Informe *</label>
+        <select id="updateReportSelect" required onchange="loadUpdateReportOptions()">
+          <option value="">-- Selecciona un informe --</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>¿Qué deseas actualizar? *</label>
+        <select id="updateMode" required onchange="toggleUpdateFields()">
+          <option value="informe">Informe General</option>
+          <option value="seccion">Sección</option>
+          <option value="parametro">Parámetro</option>
+        </select>
+      </div>
+
+      <div id="updateFieldsContainer"></div>
+      <div id="messageUpdateReport"></div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-modal btn-modal-secondary" onclick="closeModal('modalUpdateReport')">Cancelar</button>
+        <button type="submit" class="btn-modal btn-modal-primary">Actualizar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL: ELIMINAR ELEMENTO -->
+<div id="modalDeleteReport" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>🗑️ Eliminar Elemento</h2>
+      <button class="modal-close-btn" onclick="closeModal('modalDeleteReport')">✕</button>
+    </div>
+    <form id="formDeleteReport" onsubmit="handleDeleteReport(event)">
+      <div class="form-group">
+        <label>Seleccionar Informe *</label>
+        <select id="deleteReportSelect" required onchange="loadDeleteReportOptions()">
+          <option value="">-- Selecciona un informe --</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>¿Qué deseas eliminar? *</label>
+        <select id="deleteMode" required onchange="toggleDeleteFields()">
+          <option value="informe">Eliminar Informe Completo</option>
+          <option value="seccion">Eliminar Sección</option>
+          <option value="parametro">Eliminar Parámetro</option>
+        </select>
+      </div>
+
+      <div id="deleteFieldsContainer"></div>
+
+      <div style="background: #fff3cd; border: 1px solid #ffc107; padding: 12px; border-radius: 8px; margin: 12px 0; color: #856404;">
+        <strong>⚠️ Advertencia:</strong> Esta acción no se puede deshacer.
+      </div>
+
+      <div id="messageDeleteReport"></div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-modal btn-modal-secondary" onclick="closeModal('modalDeleteReport')">Cancelar</button>
+        <button type="submit" class="btn-modal btn-modal-danger">Eliminar Permanentemente</button>
+      </div> 
+    </form>
+  </div>
+</div>
+
+<!-- PIE DE PÁGINA MODERNO -->
+<footer class="modern-footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <center><img src="LogoPrincipal.png" style="width:150px;height:92px;object-fit:contain;"></center>
+      <h3>Clínica Virgen de Guadalupe</h3>
+      <p>Sistema de Informes de Laboratorio Clínico</p>
+      <p class="footer-meta">Malabo, Guinea Ecuatorial</p>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Contacto</h4>
+      <ul>
+        <li>📍 Calle Rey Malabo · MALABO</li>
+        <li>📞 +240 350 093 213 | +240 350 093 242</li>
+        <li>📧 info@clinicavirgenguadalupe.net</li>
+        <li>📧 Laboratorio@clinicavirgenguadalupe.net </li>
+        <li>💬 WhatsApp: 555 314 387</li>
+        <li>🏦 BANGE: Clinica virgen de guadalupe II</li>
+        <li>💳 Centa: 37108887303-50</li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="#" onclick="alert('Versión 1.2.0')">Versión del Sistema</a></li>
+        <li><a href="#" onclick="mostrarDescripcionSistema()">Sobre el Sistema</a></li>
+        <li><a href="#" onclick="mostrarPoliticaPrivacidad()">Privacidad</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Desarrollador</h4>
+      <p><strong>Ángel Nicolás Esono WONG MODJO</strong></p>
+      <p class="footer-meta">Desarrollador de Sistemas</p>
+    </div>
+  </div>
+  
+  <div class="footer-divider"></div>
+  
+  <div class="footer-copyright">
+    <p>&copy; 2025 Clínica Virgen de Guadalupe. Todos los derechos reservados a <strong>Ángel Nicolás Esono WONG MODJO</strong></p>
+    <p class="footer-tagline">Sistema de Gestión de Informes Clínicos | v1.2.2</p>
+  </div>
+</footer>
+                                                          
+<script src="main.js"></script>
+</body>
+</html>
