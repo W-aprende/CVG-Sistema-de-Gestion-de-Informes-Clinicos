@@ -1,1 +1,0 @@
-# CVG-Sistema-de-Gestion-de-Informes-Clinicos
