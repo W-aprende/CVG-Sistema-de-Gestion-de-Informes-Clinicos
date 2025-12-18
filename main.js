@@ -1014,7 +1014,9 @@ function renderReports() {
 // Función para renderizar secciones
 function renderSectionSelectors() {
   sectionsContainer.innerHTML = '';
-  const selectedReports = Array.from(state.selectedReports).map(id => REPORTS[id]);
+  // Filtrar IDs para evitar errores si hay datos corruptos en localStorage
+  const validReportIds = Array.from(state.selectedReports).filter(id => id && REPORTS[id]);
+  const selectedReports = validReportIds.map(id => REPORTS[id]);
 
   if (selectedReports.length === 0) {
     sectionsContainer.innerHTML = `
@@ -1170,7 +1172,7 @@ function renderParameterForms() {
       header.className = 'accordion-header';
       header.style.cssText = `
         padding: 14px;
-        background: linear-gradient(90deg, #f38b02);
+        background: linear-gradient(90deg, #f38b02, #ffb347);
         cursor: pointer;
         display: flex;
         justify-content: space-between;
@@ -1191,9 +1193,9 @@ function renderParameterForms() {
       content.className = 'accordion-content';
       content.style.cssText = `
         padding: 0;
-        max-height: 500px;
+        max-height: 800px;
         overflow-y: auto;
-        display: none;
+        display: block; // Cambiado a block para que se muestre por defecto
       `;
 
       const tbl = document.createElement('table');
@@ -2778,10 +2780,21 @@ document.querySelectorAll('input[type="text"], textarea').forEach(input => {
 document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('p_fecha').valueAsDate = new Date();
 
-  // Cargar estado guardado
+  // 1. Cargar configuración de informes personalizados primero
+  const savedReportsConfig = localStorage.getItem('reportsConfig');
+  if (savedReportsConfig) {
+    try {
+      const customReports = JSON.parse(savedReportsConfig);
+      Object.assign(REPORTS, customReports);
+    } catch (e) {
+      console.error("Error cargando configuración de informes:", e);
+    }
+  }
+
+  // 2. Cargar estado guardado de la aplicación
   loadAppState();
 
-  // Renderizar interfaz
+  // 3. Renderizar interfaz
   renderAll();
 
   // Configurar event listeners para modales
