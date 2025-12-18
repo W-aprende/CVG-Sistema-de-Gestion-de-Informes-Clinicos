@@ -1,0 +1,21 @@
+{
+  "name": "cvg-sistema-de-gestion-de-informes-clinicos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w-aprende/CVG-Sistema-de-Gestion-de-Informes-Clinicos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/w-aprende/CVG-Sistema-de-Gestion-de-Informes-Clinicos/issues"
+  },
+  "homepage": "https://github.com/w-aprende/CVG-Sistema-de-Gestion-de-Informes-Clinicos#readme"
+}
