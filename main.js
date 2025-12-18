@@ -19,7 +19,7 @@ const APP_CONFIG = {
 // Plantillas predefinidas
 const TEMPLATES = {
   completo: {//plantilla de emergencia
-    reports: ['parasitologia_gota', 'inmunologia', 'urinalysis','pruebas_rapidas'],
+    reports: ['parasitologia_gota', 'inmunologia', 'urinalysis', 'pruebas_rapidas'],
     sections: {
       parasitologia_gota: ['malaria', 'filaria'],
       inmunologia: ['tumorales'],
@@ -38,438 +38,497 @@ const TEMPLATES = {
 // Detalles de los informes 
 const REPORTS = {
   hematologia: {
-    id:"hematologia", icon:"🩸", title:"HEMATOLOGÍA",
-    sections:{
-      coagulograma_completo: {title:"COAGULOGRAMA COMPLETO", params:[
-        {k:"Fibrinógeno", unit:"Mg/dL", normal:"200-400"},
-        {k:"Tiempo de Protrombina", unit:"Segundos", normal:"10-14"},
-        {k:"INR", unit:"---------", normal:"0.8-1.2"},
-        {k:"TTPA", unit:"Segundos", normal:"25-45"},
-        {k:"Tiempo de Trombina", unit:"Segundos", normal:"9-35"},
-        {k:"Dímero D", unit:"ng/mL", normal:"< 500"}
-      ]},
-      coagulograma_minimo: {title:"COAGULOGRAMA MINIMO", params:[
-        {k:"Recuento de plaquetas", unit:"Plaquetas/mL", normal:"150.000-450.000"},
-        {k:"Tiempo de sangrado (Duke)", unit:"Minutos", normal:"3-7"},
-        {k:"Tiempo de coagulación (Lee-White)", unit:"Minutos", normal:"5-10"}
-      ]},
-      vsg: {title:"VELOCIDAD DE SEDIMENTACION GLOBULAR", params:[
-        {k:"1ª Hora", unit:"mm/h", normal:"Hombres:0-15/h, [[br]]Mujer:0-20/h, [[br]]Niños:0-10/h"},
-        {k:"2ª Hora", unit:"mm/h", normal:"Hombres:0-15/h, [[br]]Mujer:0-20/h, [[br]]Niños:0-10/h"}
-      ]},
-      reticulocitos: {title:"RETICULOCITOS", params:[
-        {k:"Conteo de Reticulocitos", unit:"%", normal:"0.5 - 2.0"}
-      ]},
+    id: "hematologia", icon: "🩸", title: "HEMATOLOGÍA",
+    sections: {
+      coagulograma_completo: {
+        title: "COAGULOGRAMA COMPLETO", params: [
+          { k: "Fibrinógeno", unit: "Mg/dL", normal: "200-400" },
+          { k: "Tiempo de Protrombina", unit: "Segundos", normal: "10-14" },
+          { k: "INR", unit: "---------", normal: "0.8-1.2" },
+          { k: "TTPA", unit: "Segundos", normal: "25-45" },
+          { k: "Tiempo de Trombina", unit: "Segundos", normal: "9-35" },
+          { k: "Dímero D", unit: "ng/mL", normal: "< 500" }
+        ]
+      },
+      coagulograma_minimo: {
+        title: "COAGULOGRAMA MINIMO", params: [
+          { k: "Recuento de plaquetas", unit: "Plaquetas/mL", normal: "150.000-450.000" },
+          { k: "Tiempo de sangrado (Duke)", unit: "Minutos", normal: "3-7" },
+          { k: "Tiempo de coagulación (Lee-White)", unit: "Minutos", normal: "5-10" }
+        ]
+      },
+      vsg: {
+        title: "VELOCIDAD DE SEDIMENTACION GLOBULAR", params: [
+          { k: "1ª Hora", unit: "mm/h", normal: "Hombres:0-15/h, [[br]]Mujer:0-20/h, [[br]]Niños:0-10/h" },
+          { k: "2ª Hora", unit: "mm/h", normal: "Hombres:0-15/h, [[br]]Mujer:0-20/h, [[br]]Niños:0-10/h" }
+        ]
+      },
+      reticulocitos: {
+        title: "RETICULOCITOS", params: [
+          { k: "Conteo de Reticulocitos", unit: "%", normal: "0.5 - 2.0" }
+        ]
+      },
       lamina: {
         title: "LAMINA PERIFERICA",
         params: [
-          {k: "GLOBULOS ROJOS", unit: "", normal: "", type: "text", readonly: true},
-          {k: "Hematocrito", unit: "%", normal: "Hombres: 41-53, [[br]]Mujeres: 36-46", type:"text"},
-          {k: "Hemoglobina", unit: "g/dL", normal: "Hombres: 13.5-17.5, [[br]]Mujeres: 12.0-15.5", type:"text"},
-          {k: "Tamaño", unit: "", normal: "", type: "select", options: ["Normal", "Microcítica", "Macrocítica", "Normocítica"]},
-          {k: "Forma", unit: "", normal: "", type: "select", options: ["Normal", "Anisocitosis", "Poiquilocitosis", "Mixtas"]},
-          {k: "Color", unit: "", normal: "", type: "select", options: ["Normal", "Hipocrómico", "Hipercromático", "Policromático"]},
-          {k: "Presencia de inclusiones", unit: "", normal: "", type: "select", options: ["Ausentes", "Howell-Jolly", "Punteado basófilo", "Cuerpos de Heinz"]},
-          {k: "Recuento de eritrocitos", unit: "millones/µL", normal: "Hombres: 4.7-6.1, [[br]]Mujeres: 4.2-5.4"},
-          {k: "Índices eritrocitarios", unit: "", normal: "", type: "text", readonly: true},
-          {k: "VCM", unit: "fL", normal: "80-100", type:"text"},
-          {k: "HCM", unit: "pg", normal: "27-33", type:"text"},
-          {k: "CHCM", unit: "g/dL", normal: "32-36", type:"text"},
-          {k: "Morfología de los glóbulos rojos", unit: "", normal: "", type: "text", readonly: true},
-          {k: "Distribución del tamaño de los glóbulos rojos (RDW)", unit: "%", normal: "11.5 - 14.5"},
-          {k: "Anomalías morfológicas observadas", unit: "", normal: "", type: "text", placeholder: "Ej: Presencia de esferocitos, eliptocitos, etc."},
-          {k: "Reticulocitos", unit: "%", normal: "0.5 - 2.0", type:"text"},
-          {k: "Recuento de reticulocitos", unit: "millones/µL", normal: "25,000 - 75,000", type:"text"},
-          
-          {k: "GLOBULOS BLANCOS (Recuento diferencial)", unit: "", normal: "", type: "text", readonly: true},
-          {k: "Neutrófilos (segmentados, bandas)", unit:"%", normal:"55 - 65", type:"text"},
-          {k: "Linfocitos", unit:"%", normal:"23 - 35", type:"text"},
-          {k: "Monocitos", unit:"%", normal:"4 - 8", type:"text"},
-          {k: "Eosinófilos", unit:"%", normal:"0.5 - 4", type:"text"},
-          {k: "Basófilos", unit:"%", normal:"0 - 2", type:"text"},
-          {k: "Morfología de cada tipo celular", unit: "", normal: "", type: "text", placeholder: "Ej: Neutrófilos con toxicidad moderada"},
-          {k: "PLAQUETAS", unit: "", normal: "", type: "text", readonly: true},
-          {k: "Tamaño", unit: "", normal: "", type: "select", options: ["Normal", "Pequeñas", "Grandes", "Variado"]},
-          {k: "Agregación", unit: "", normal: "", type: "select", options: ["Normal", "Disminuida", "Aumentada"]},
-          {k: "Comentario final/Conclusión", unit: "", normal: "", type: "text", placeholder: "Conclusión final de la lámina periférica"}
+          { k: "GLOBULOS ROJOS", unit: "", normal: "", type: "text", readonly: true },
+          { k: "Hematocrito", unit: "%", normal: "Hombres: 41-53, [[br]]Mujeres: 36-46", type: "text" },
+          { k: "Hemoglobina", unit: "g/dL", normal: "Hombres: 13.5-17.5, [[br]]Mujeres: 12.0-15.5", type: "text" },
+          { k: "Tamaño", unit: "", normal: "", type: "select", options: ["Normal", "Microcítica", "Macrocítica", "Normocítica"] },
+          { k: "Forma", unit: "", normal: "", type: "select", options: ["Normal", "Anisocitosis", "Poiquilocitosis", "Mixtas"] },
+          { k: "Color", unit: "", normal: "", type: "select", options: ["Normal", "Hipocrómico", "Hipercromático", "Policromático"] },
+          { k: "Presencia de inclusiones", unit: "", normal: "", type: "select", options: ["Ausentes", "Howell-Jolly", "Punteado basófilo", "Cuerpos de Heinz"] },
+          { k: "Recuento de eritrocitos", unit: "millones/µL", normal: "Hombres: 4.7-6.1, [[br]]Mujeres: 4.2-5.4" },
+          { k: "Índices eritrocitarios", unit: "", normal: "", type: "text", readonly: true },
+          { k: "VCM", unit: "fL", normal: "80-100", type: "text" },
+          { k: "HCM", unit: "pg", normal: "27-33", type: "text" },
+          { k: "CHCM", unit: "g/dL", normal: "32-36", type: "text" },
+          { k: "Morfología de los glóbulos rojos", unit: "", normal: "", type: "text", readonly: true },
+          { k: "Distribución del tamaño de los glóbulos rojos (RDW)", unit: "%", normal: "11.5 - 14.5" },
+          { k: "Anomalías morfológicas observadas", unit: "", normal: "", type: "text", placeholder: "Ej: Presencia de esferocitos, eliptocitos, etc." },
+          { k: "Reticulocitos", unit: "%", normal: "0.5 - 2.0", type: "text" },
+          { k: "Recuento de reticulocitos", unit: "millones/µL", normal: "25,000 - 75,000", type: "text" },
+
+          { k: "GLOBULOS BLANCOS (Recuento diferencial)", unit: "", normal: "", type: "text", readonly: true },
+          { k: "Neutrófilos (segmentados, bandas)", unit: "%", normal: "55 - 65", type: "text" },
+          { k: "Linfocitos", unit: "%", normal: "23 - 35", type: "text" },
+          { k: "Monocitos", unit: "%", normal: "4 - 8", type: "text" },
+          { k: "Eosinófilos", unit: "%", normal: "0.5 - 4", type: "text" },
+          { k: "Basófilos", unit: "%", normal: "0 - 2", type: "text" },
+          { k: "Morfología de cada tipo celular", unit: "", normal: "", type: "text", placeholder: "Ej: Neutrófilos con toxicidad moderada" },
+          { k: "PLAQUETAS", unit: "", normal: "", type: "text", readonly: true },
+          { k: "Tamaño", unit: "", normal: "", type: "select", options: ["Normal", "Pequeñas", "Grandes", "Variado"] },
+          { k: "Agregación", unit: "", normal: "", type: "select", options: ["Normal", "Disminuida", "Aumentada"] },
+          { k: "Comentario final/Conclusión", unit: "", normal: "", type: "text", placeholder: "Conclusión final de la lámina periférica" }
         ]
       },
-      tipo_sangre: {title:"TIPO DE SANGRE", params:[
-        {k:"Grupo ABO", unit:"", normal:"A/B/AB/O", type:"select", options:["A","B","AB","O"]},
-        {k:"Factor RH", unit:"", normal:"Positivo/Negativo", type:"select", options:["Positivo","Negativo"]}
-      ]},
-      hemoglobina: {title:"ELECTROFORESIS CUANTITATIVA DE HEMOGLOBINA", params:[
-        {k:"Hemoglobina A1 HbA1", unit:"%", normal:"95-98", type:"text"},
-        {k:"Hemoglobina A2 HbA2", unit:"%", normal:"2-3", type:"text"},
-        {k:"Hemoglobina F HbF", unit:"%", normal:"Menos del 1-2", type:"text"},
-        {k:"Hemoglobina E HbE", unit:"%", normal:"Ausente", type:"text"},
-        {k:"Hemoglobina C HbC", unit:"%", normal:"Ausente", type:"text"},
-        {k:"Hemoglobina S HbS", unit:"%", normal:"Ausente", type:"text"},
-        {k:"Resultado Final", unit:"", normal:"", type:"select", options:["HbAA","HbAC","HbAS","HbSS","HbSC","HbCC"]},
-        {k: "Comentarios/sugerencias ", unit: "", normal: "", type: "text", placeholder: ""}
-      ]},
-        hemoglobinaC: {title:"ELECTROFORESIS  CUALITATIVA DE HEMOGLOBINA", params:[
-        {k:"Hemoglobina Cualitativa A HbA", unit:"", normal:"", type: "select", options:["Presente","Ausente"]},
-        {k:"Hemoglobina Cualitativa C HbC", unit:"", normal:"", type: "select", options:["Presente","Ausente"]},
-        {k:"Hemoglobina Cualitativa S HbS", unit:"", normal:"", type: "select", options:["Presente","Ausente"]},
-        {k:"Resultado Final", unit:"", normal:"", type:"select", options:["HbAA","HbAC","HbAS","HbSS","HbSC","HbCC"]},
-        {k: "Comentarios/sugerencias ", unit: "", normal: "", type: "text", placeholder: ""}
-      ]}
+      tipo_sangre: {
+        title: "TIPO DE SANGRE", params: [
+          { k: "Grupo ABO", unit: "", normal: "A/B/AB/O", type: "select", options: ["A", "B", "AB", "O"] },
+          { k: "Factor RH", unit: "", normal: "Positivo/Negativo", type: "select", options: ["Positivo", "Negativo"] }
+        ]
+      },
+      hemoglobina: {
+        title: "ELECTROFORESIS CUANTITATIVA DE HEMOGLOBINA", params: [
+          { k: "Hemoglobina A1 HbA1", unit: "%", normal: "95-98", type: "text" },
+          { k: "Hemoglobina A2 HbA2", unit: "%", normal: "2-3", type: "text" },
+          { k: "Hemoglobina F HbF", unit: "%", normal: "Menos del 1-2", type: "text" },
+          { k: "Hemoglobina E HbE", unit: "%", normal: "Ausente", type: "text" },
+          { k: "Hemoglobina C HbC", unit: "%", normal: "Ausente", type: "text" },
+          { k: "Hemoglobina S HbS", unit: "%", normal: "Ausente", type: "text" },
+          { k: "Resultado Final", unit: "", normal: "", type: "select", options: ["HbAA", "HbAC", "HbAS", "HbSS", "HbSC", "HbCC"] },
+          { k: "Comentarios/sugerencias ", unit: "", normal: "", type: "text", placeholder: "" }
+        ]
+      },
+      hemoglobinaC: {
+        title: "ELECTROFORESIS  CUALITATIVA DE HEMOGLOBINA", params: [
+          { k: "Hemoglobina Cualitativa A HbA", unit: "", normal: "", type: "select", options: ["Presente", "Ausente"] },
+          { k: "Hemoglobina Cualitativa C HbC", unit: "", normal: "", type: "select", options: ["Presente", "Ausente"] },
+          { k: "Hemoglobina Cualitativa S HbS", unit: "", normal: "", type: "select", options: ["Presente", "Ausente"] },
+          { k: "Resultado Final", unit: "", normal: "", type: "select", options: ["HbAA", "HbAC", "HbAS", "HbSS", "HbSC", "HbCC"] },
+          { k: "Comentarios/sugerencias ", unit: "", normal: "", type: "text", placeholder: "" }
+        ]
+      }
     }
   },
   inmunologia: {
-    id:"inmunologia", icon:"🔬", title:"INMUNOLOGIA / MARCADORES TUMORALES",
-    sections:{
-      tumorales: {title:"MARCADORES TUMORALES", params:[
-        {k:"PSA - TOTAL", unit:"ng/mL", normal:"< 4", type:"text"},
-        {k:"PSA - LIBRE", unit:"ng/mL", normal:"0.0 - 1.5", type:"text"},
-        {k:"ALFA-FETOPROTEINA (AFP)", unit:"ng/mL", normal:"< 10", type:"text"},
-        {k:"ANTIGENO CARCINOEMBRIONARIO (CEA)", unit:"ng/mL", normal:"< 5", type:"text"},
-        {k:"ANTIGENO CARBOHIDRATO 125 (CA 125)", unit:"U/mL", normal:"< 35", type:"text"},
-        {k:"ANTIGENO CARBOHIDRATO 19.9 (CA 19.9)", unit:"U/mL", normal:"< 37", type:"text"},
-        {k:"ANTIGENO CARBOHIDRATO 15.3 (CA 15.3)", unit:"U/mL", normal:"< 35", type:"text"},
-        {k:"ANTIGENO CARBOHIDRATO 72.4 (CA 72.4)", unit:"U/mL", normal:"5.6 - 8.2", type:"text"},
-        {k:"Hepatitis B / (HBsAg)-Determinación cuantitativa del antígeno de superficie", unit:"COI", normal:"< 0.90 (Negativo) [[br]]≥0.90 a < 1.0 (Limítrofe/Indeterminado) [[br]]≥ 1.0 (Positivo)", type:"text"},
-        {k:"Hepatitis C / (VHC)-Determinación cuantitativa  del anticuerpo del virus", unit:"COI", normal:"< 0.90 (Negativo) [[br]]≥0.90 a < 1.0 (Limítrofe/Indeterminado) [[br]]≥ 1.0 (Positivo)", type:"text"},
-        {k:"TIROTROPINA (TSH)", unit:"µUI/mL", normal:"0.270-4.20", type:"text"},
-        {k:"TIROXINA TOTAL (T4)", unit:"nmol/mL", normal:"65.6 - 181.5", type:"text"},
-        {k:"TIROXINA LIBRE (FT4)", unit:"nmol/mL", normal:"11.97 - 21.88", type:"text"},
-        {k:"TRIYODOTIRONINA TOTAL (T3)", unit:"nmol/mL", normal:"0.9 - 2.8", type:"text"},
-        {k:"TRIYODOTIRONINA LIBRE (FT3)", unit:"nmol/mL", normal:"2.0 - 7.0", type:"text"},
-        {k:"FERRITINA", unit:"ng/mL", normal:"Hombres: 30-400 [[br]]Mujeres: 13-150", type:"text"}
-      ]}
+    id: "inmunologia", icon: "🔬", title: "INMUNOLOGIA / MARCADORES TUMORALES",
+    sections: {
+      tumorales: {
+        title: "MARCADORES TUMORALES", params: [
+          { k: "PSA - TOTAL", unit: "ng/mL", normal: "< 4", type: "text" },
+          { k: "PSA - LIBRE", unit: "ng/mL", normal: "0.0 - 1.5", type: "text" },
+          { k: "ALFA-FETOPROTEINA (AFP)", unit: "ng/mL", normal: "< 10", type: "text" },
+          { k: "ANTIGENO CARCINOEMBRIONARIO (CEA)", unit: "ng/mL", normal: "< 5", type: "text" },
+          { k: "ANTIGENO CARBOHIDRATO 125 (CA 125)", unit: "U/mL", normal: "< 35", type: "text" },
+          { k: "ANTIGENO CARBOHIDRATO 19.9 (CA 19.9)", unit: "U/mL", normal: "< 37", type: "text" },
+          { k: "ANTIGENO CARBOHIDRATO 15.3 (CA 15.3)", unit: "U/mL", normal: "< 35", type: "text" },
+          { k: "ANTIGENO CARBOHIDRATO 72.4 (CA 72.4)", unit: "U/mL", normal: "5.6 - 8.2", type: "text" },
+          { k: "Hepatitis B / (HBsAg)-Determinación cuantitativa del antígeno de superficie", unit: "COI", normal: "< 0.90 (Negativo) [[br]]≥0.90 a < 1.0 (Limítrofe/Indeterminado) [[br]]≥ 1.0 (Positivo)", type: "text" },
+          { k: "Hepatitis C / (VHC)-Determinación cuantitativa  del anticuerpo del virus", unit: "COI", normal: "< 0.90 (Negativo) [[br]]≥0.90 a < 1.0 (Limítrofe/Indeterminado) [[br]]≥ 1.0 (Positivo)", type: "text" },
+          { k: "TIROTROPINA (TSH)", unit: "µUI/mL", normal: "0.270-4.20", type: "text" },
+          { k: "TIROXINA TOTAL (T4)", unit: "nmol/mL", normal: "65.6 - 181.5", type: "text" },
+          { k: "TIROXINA LIBRE (FT4)", unit: "nmol/mL", normal: "11.97 - 21.88", type: "text" },
+          { k: "TRIYODOTIRONINA TOTAL (T3)", unit: "nmol/mL", normal: "0.9 - 2.8", type: "text" },
+          { k: "TRIYODOTIRONINA LIBRE (FT3)", unit: "nmol/mL", normal: "2.0 - 7.0", type: "text" },
+          { k: "FERRITINA", unit: "ng/mL", normal: "Hombres: 30-400 [[br]]Mujeres: 13-150", type: "text" }
+        ]
+      }
     }
   },
   parasitologia_gota: {
-    id:"parasitologia_gota", icon:"🦠", title:"PARASITOLOGIA SANGINEA",
-    sections:{
-      malaria: {title:"Malaria", params:[
-        {k:"Gota gruesa/Extensión", unit:"", normal:"Negativo: No se observan formas parasitarias de Plasmodium.", type:"select", options:["Negativo"]},
-        {k:"Gota gruesa/Extension", unit:"", normal:"", type:"select", options:["Positivo"]},
-        {k:"Densidad parasitaria", unit:"", normal:"Positivo:[[br]]+ = 1 – 10 parasito por 100 campos[[br]]++ = 11-100 parasito por 100 campos[[br]]+++ = 1 – 10 parásitos en un solo campo[[br]]++++ =  > 10 parásitos en un solo campo.", type:"select", options:["Positivo (+)","Positivo (++)","Positivo (+++)","Positivo (++++)"]},
-        {k:"Especie", unit:"", normal:"", type:"select", options:["Plasmodium falciparum","Plasmodium vivax","Plasmodium malariae","Plasmodium ovale","No identificado"]}
-      ]},
-        filaria: {title:"Filaria", params:[
-        {k:"Gota gruesa/Extensión", unit:"", normal:"Negativo: No se observan formas parasitarias de Plasmodium.", type:"select", options:["Negativo"]},
-        {k:"Gota gruesa/Extension", unit:"", normal:"", type:"select", options:["Positivo"]},
-        {k:"Especie", unit:"", normal:"", type:"select", options:["Plasmodium falciparum","Plasmodium vivax","Plasmodium malariae","Plasmodium ovale","No identificado"]},
-        {k:"Comentario", unit:"", normal:"", type:"text",placeholder:"Cualquier otro hallazgo"}
-      ]}
+    id: "parasitologia_gota", icon: "🦠", title: "PARASITOLOGIA SANGINEA",
+    sections: {
+      malaria: {
+        title: "Malaria", params: [
+          { k: "Gota gruesa/Extensión", unit: "", normal: "Negativo: No se observan formas parasitarias de Plasmodium.", type: "select", options: ["Negativo"] },
+          { k: "Gota gruesa/Extension", unit: "", normal: "", type: "select", options: ["Positivo"] },
+          { k: "Densidad parasitaria", unit: "", normal: "Positivo:[[br]]+ = 1 – 10 parasito por 100 campos[[br]]++ = 11-100 parasito por 100 campos[[br]]+++ = 1 – 10 parásitos en un solo campo[[br]]++++ =  > 10 parásitos en un solo campo.", type: "select", options: ["Positivo (+)", "Positivo (++)", "Positivo (+++)", "Positivo (++++)"] },
+          { k: "Especie", unit: "", normal: "", type: "select", options: ["Plasmodium falciparum", "Plasmodium vivax", "Plasmodium malariae", "Plasmodium ovale", "No identificado"] }
+        ]
+      },
+      filaria: {
+        title: "Filaria", params: [
+          { k: "Gota gruesa/Extensión", unit: "", normal: "Negativo: No se observan formas parasitarias de Plasmodium.", type: "select", options: ["Negativo"] },
+          { k: "Gota gruesa/Extension", unit: "", normal: "", type: "select", options: ["Positivo"] },
+          { k: "Especie", unit: "", normal: "", type: "select", options: ["Plasmodium falciparum", "Plasmodium vivax", "Plasmodium malariae", "Plasmodium ovale", "No identificado"] },
+          { k: "Comentario", unit: "", normal: "", type: "text", placeholder: "Cualquier otro hallazgo" }
+        ]
+      }
     }
   },
   parasitologia_heces: {
-    id:"parasitologia_heces", icon:"💩", title:"PARASITOLOGIA / HECES",
-    sections:{
-      coprologico: {title:"Coprológico", params:[
-        {k:"Método", unit:"", normal:"", type:"select", options:["Preparación directa"]},
-        {k:"Color", unit:"", normal:"", type:"select", options:["Marrón","Amarillo","Verde","Negro","Rojizo","Blanquecino"]},
-        {k:"Consistencia", unit:"", normal:"", type:"select", options:["Formada","Blanda","Líquida","Dura","Pastosa"]},
-        {k:"Moco", unit:"", normal:"", type:"select", options:["Ausente","Escaso","Moderado","Abundante"]},
-        {k:"Sangre", unit:"", normal:"", type:"select", options:["Ausente","Escasa","Moderada","Abundante"]},
-        {k:"Resultado", unit:"", normal:" Negativo/No se observa ninguna etapa parasitaria", type:"select", options:["Negativo"]},
-        {k:"Resultado Heces", unit:"", normal:"Positivo (presencia de huevo, quiste, trofozoito o larva)", type:"select", options:["Positivo"]},
-        {k:"Especie", unit:"", normal:"", type:"select", options:["Ascaris lumbricoides","Trichuris trichiura","Enterobius vermicularis","Taenia solium","Taenia saginata","Hymenolepis nana","Giardia lamblia","Entamoeba histolytica","Cryptosporidium","Balantidium coli","Levadura"]},
-        {k:"Etapa", unit:"", normal:"", type:"select", options:["Huevo","Quiste","Trofozoito","Larva","Adulto"]},
-        {k:"Cantidad", unit:"", normal:"", type:"select", options:["Escasos (+)","Moderados (++)","Abundantes (+++)"]},
-        {k:"Leucocitos", unit:"", normal:"", type:"select", options:["Escasos (+)","Moderados (++)","Abundantes (+++)"]},
-        {k:"Hematies", unit:"", normal:"", type:"select", options:["Escasos (+)","Moderados (++)","Abundantes (+++)"]},
-        { k:"Otros hallazgos", unit:"", normal:"", type:"text", placeholder:"Cualquier otro hallazgo"}
-      ]}
+    id: "parasitologia_heces", icon: "💩", title: "PARASITOLOGIA / HECES",
+    sections: {
+      coprologico: {
+        title: "Coprológico", params: [
+          { k: "Método", unit: "", normal: "", type: "select", options: ["Preparación directa"] },
+          { k: "Color", unit: "", normal: "", type: "select", options: ["Marrón", "Amarillo", "Verde", "Negro", "Rojizo", "Blanquecino"] },
+          { k: "Consistencia", unit: "", normal: "", type: "select", options: ["Formada", "Blanda", "Líquida", "Dura", "Pastosa"] },
+          { k: "Moco", unit: "", normal: "", type: "select", options: ["Ausente", "Escaso", "Moderado", "Abundante"] },
+          { k: "Sangre", unit: "", normal: "", type: "select", options: ["Ausente", "Escasa", "Moderada", "Abundante"] },
+          { k: "Resultado", unit: "", normal: " Negativo/No se observa ninguna etapa parasitaria", type: "select", options: ["Negativo"] },
+          { k: "Resultado Heces", unit: "", normal: "Positivo (presencia de huevo, quiste, trofozoito o larva)", type: "select", options: ["Positivo"] },
+          { k: "Especie", unit: "", normal: "", type: "select", options: ["Ascaris lumbricoides", "Trichuris trichiura", "Enterobius vermicularis", "Taenia solium", "Taenia saginata", "Hymenolepis nana", "Giardia lamblia", "Entamoeba histolytica", "Cryptosporidium", "Balantidium coli", "Levadura"] },
+          { k: "Etapa", unit: "", normal: "", type: "select", options: ["Huevo", "Quiste", "Trofozoito", "Larva", "Adulto"] },
+          { k: "Cantidad", unit: "", normal: "", type: "select", options: ["Escasos (+)", "Moderados (++)", "Abundantes (+++)"] },
+          { k: "Leucocitos", unit: "", normal: "", type: "select", options: ["Escasos (+)", "Moderados (++)", "Abundantes (+++)"] },
+          { k: "Hematies", unit: "", normal: "", type: "select", options: ["Escasos (+)", "Moderados (++)", "Abundantes (+++)"] },
+          { k: "Otros hallazgos", unit: "", normal: "", type: "text", placeholder: "Cualquier otro hallazgo" }
+        ]
+      }
     }
   },
   exudado: {
-    id:"exudado", icon:"🧫", title:"EXUDADO VAGINAL",
-    sections:{
-      fresco: {title:"Examen fresco", params:[
-        {k:"Células epiteliales", unit:"", normal:"Ausente/Escasas", type:"select", options:["Ausentes","Escasas (+)","Moderadas (++)","Abundantes (+++)"]},
-        {k:"Leucocitos", unit:"", normal:"2-4/campo", type:"text"},
-        {k:"Levaduras", unit:"", normal:"Ausentes/No se observan", type:"select", options:["Ausentes","Escasas (+)","Moderadas (++)","Abundantes (+++)"]},
-        {k:"Trichomonas vaginalis", unit:"", normal:"Ausentes/No se observan", type:"select", options:["Ausentes","Escasas (+)","Moderadas (++)","Abundantes (+++)"]},
-        {k:"Bacterias", unit:"", normal:"Ausentes/No se observan", type:"select", options:["Ausentes","Escasas (+)","Moderadas (++)","Abundantes (+++)"]},
-        {k:"Células clave/Clue cells", unit:"", normal:"No se observaron", type:"select", options:["Escasas (+)","Moderadas (++)","Abundantes (+++)"]},
-        {k:"Hematíes", unit:"", normal:"Ausentes/No se observan", type:"text"},
-        {k:"PH", unit:"", normal:"3.8 - 4.5", type:"text"},
-        {k:"Test de Aminas", unit:"", normal:"Negativo", type:"select", options:["Negativo","Positivo"]}
-      ]},
-      gram: {title:"Tinción de Gram", params:[
-        {k:"Bacterias", unit:"", normal:"Resultados normales: Indican la ausencia de bacterias/levaduras. [[br]]Resultados anormales: La presencia de bacterias (cocos o bacilos), la forma de bacterias (cocos o bacilos), su agrupación (cadenas o pares)  o presencia de levaduras.", type:"text", placeholder:"Ej: Gram positivas en cadenas"},
-        {k:"Levaduras", unit:"", normal:"Resultados normales: Indican la ausencia de bacterias/levaduras. [[br]]Resultados anormales: La presencia de bacterias (cocos o bacilos), su agrupación (cadenas o pares)  o presencia de levaduras.", type:"select", options:["Ausentes","Escasas (+)","Moderadas (++)","Abundantes (+++)"]},
-        {k:"Clue cells", unit:"", normal:"No se observaron, escasas, moderadas o abundantes", type:"select", options:["No se observan","Escasas (+)","Moderadas (++)","Abundantes (+++)"]}
-      ]},
-      antigenos: {title:"Prueba de detección de antígenos", params:[
-        {k:"Candida albicans", unit:"", normal:"Negativo", type:"select", options:["Negativo","Positivo"]},
-        {k:"Trichomonas vaginalis", unit:"", normal:"Negativo", type:"select", options:["Negativo","Positivo"]},
-        {k:"Gardnerella vaginalis", unit:"", normal:"Negativo", type:"select", options:["Negativo","Positivo"]},
-        {k:"Chlamydia trachomatis", unit:"", normal:"Negativo", type:"select", options:["Negativo","Positivo"]},
-        {k:"Otros Hallazgos", unit:"", normal:"---------------", type:"text"},
-        {k:"Diagnostico/comentario final:", unit:"", normal:"Normal: No se detectan signos de infección o microorganismos anormales. ,[[br]]Anormal: Se reporta la presencia de bacterias, levaduras, trichomonas,chlamydia, células clave, un recuento elevado de glóbulos blancos, un pH elevado o un olor a pescado. ", type:"text"}
-      ]}
+    id: "exudado", icon: "🧫", title: "EXUDADO VAGINAL",
+    sections: {
+      fresco: {
+        title: "Examen fresco", params: [
+          { k: "Células epiteliales", unit: "", normal: "Ausente/Escasas", type: "select", options: ["Ausentes", "Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] },
+          { k: "Leucocitos", unit: "", normal: "2-4/campo", type: "text" },
+          { k: "Levaduras", unit: "", normal: "Ausentes/No se observan", type: "select", options: ["Ausentes", "Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] },
+          { k: "Trichomonas vaginalis", unit: "", normal: "Ausentes/No se observan", type: "select", options: ["Ausentes", "Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] },
+          { k: "Bacterias", unit: "", normal: "Ausentes/No se observan", type: "select", options: ["Ausentes", "Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] },
+          { k: "Células clave/Clue cells", unit: "", normal: "No se observaron", type: "select", options: ["Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] },
+          { k: "Hematíes", unit: "", normal: "Ausentes/No se observan", type: "text" },
+          { k: "PH", unit: "", normal: "3.8 - 4.5", type: "text" },
+          { k: "Test de Aminas", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Positivo"] }
+        ]
+      },
+      gram: {
+        title: "Tinción de Gram", params: [
+          { k: "Bacterias", unit: "", normal: "Resultados normales: Indican la ausencia de bacterias/levaduras. [[br]]Resultados anormales: La presencia de bacterias (cocos o bacilos), la forma de bacterias (cocos o bacilos), su agrupación (cadenas o pares)  o presencia de levaduras.", type: "text", placeholder: "Ej: Gram positivas en cadenas" },
+          { k: "Levaduras", unit: "", normal: "Resultados normales: Indican la ausencia de bacterias/levaduras. [[br]]Resultados anormales: La presencia de bacterias (cocos o bacilos), su agrupación (cadenas o pares)  o presencia de levaduras.", type: "select", options: ["Ausentes", "Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] },
+          { k: "Clue cells", unit: "", normal: "No se observaron, escasas, moderadas o abundantes", type: "select", options: ["No se observan", "Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] }
+        ]
+      },
+      antigenos: {
+        title: "Prueba de detección de antígenos", params: [
+          { k: "Candida albicans", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Trichomonas vaginalis", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Gardnerella vaginalis", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Chlamydia trachomatis", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Otros Hallazgos", unit: "", normal: "---------------", type: "text" },
+          { k: "Diagnostico/comentario final:", unit: "", normal: "Normal: No se detectan signos de infección o microorganismos anormales. ,[[br]]Anormal: Se reporta la presencia de bacterias, levaduras, trichomonas,chlamydia, células clave, un recuento elevado de glóbulos blancos, un pH elevado o un olor a pescado. ", type: "text" }
+        ]
+      }
     }
   },
-   exudadoU:{
-   id:"exudadoU", icon:"🧫", title:"EXUDADO URETRAL",
-    sections:{
-      frescoU: {title:"Examen fresco", params:[
-        {k:"Células epiteliales", unit:"", normal:"Ausente/Escasas", type:"select", options:["Ausentes","Escasas (+)","Moderadas (++)","Abundantes (+++)"]},
-        {k:"Leucocitos", unit:"", normal:"2-4/campo", type:"text"},
-        {k:"Levaduras", unit:"", normal:"Ausentes/No se observan", type:"select", options:["Ausentes","Escasas (+)","Moderadas (++)","Abundantes (+++)"]},
-        {k:"Trichomonas vaginalis", unit:"", normal:"Ausentes/No se observan", type:"select", options:["Ausentes","Escasas (+)","Moderadas (++)","Abundantes (+++)"]},
-        {k:"Bacterias", unit:"", normal:"Ausentes/No se observan", type:"select", options:["Ausentes","Escasas (+)","Moderadas (++)","Abundantes (+++)"]},
-        {k:"Células clave/Clue cells", unit:"", normal:"No se observaron", type:"select", options:["Escasas (+)","Moderadas (++)","Abundantes (+++)"]},
-        {k:"Hematíes", unit:"", normal:"Ausentes/No se observan", type:"text"},
-        {k:"PH", unit:"", normal:"3.8 - 4.5", type:"text"},
-        {k:"Test de Aminas", unit:"", normal:"Negativo", type:"select", options:["Negativo","Positivo"]}
-      ]},
-      gramU: {title:"Tinción de Gram", params:[
-        {k:"Bacterias", unit:"", normal:"Resultados normales: Indican la ausencia de bacterias/levaduras. [[br]]Resultados anormales: La presencia de bacterias (cocos o bacilos), su agrupación (cadenas o pares)  o presencia de levaduras.", type:"text", placeholder:"Ej: Gram positivas en cadenas"},
-        {k:"Levaduras", unit:"", normal:"Resultados normales: Indican la ausencia de bacterias/levaduras. [[br]]Resultados anormales: La presencia de bacterias (cocos o bacilos), su agrupación (cadenas o pares)  o presencia de levaduras.", type:"select", options:["Ausentes","Escasas (+)","Moderadas (++)","Abundantes (+++)"]},
-        {k:"Clue cells", unit:"", normal:"No se observaron, escasas, moderadas o abundantes", type:"select", options:["No se observan","Escasas (+)","Moderadas (++)","Abundantes (+++)"]}
-      ]},
-      antigenosU: {title:"Prueba de detección de antígenos", params:[
-        {k:"Candida albicans", unit:"", normal:"Negativo", type:"select", options:["Negativo","Positivo"]},
-        {k:"Trichomonas vaginalis", unit:"", normal:"Negativo", type:"select", options:["Negativo","Positivo"]},
-        {k:"Gardnerella vaginalis", unit:"", normal:"Negativo", type:"select", options:["Negativo","Positivo"]},
-        {k:"Chlamydia trachomatis", unit:"", normal:"Negativo", type:"select", options:["Negativo","Positivo"]},
-        {k:"Otros Hallazgos", unit:"", normal:"---------------", type:"text"},
-        {k:"Diagnostico/comentario final:", unit:"", normal:"Normal: No se detectan signos de infección o microorganismos anormales. ,[[br]]Anormal: Se reporta la presencia de bacterias, levaduras, trichomonas,chlamydia, células clave, un recuento elevado de glóbulos blancos, un pH elevado o un olor a pescado. ", type:"text"}
-      ]}
-    } 
-   },
+  exudadoU: {
+    id: "exudadoU", icon: "🧫", title: "EXUDADO URETRAL",
+    sections: {
+      frescoU: {
+        title: "Examen fresco", params: [
+          { k: "Células epiteliales", unit: "", normal: "Ausente/Escasas", type: "select", options: ["Ausentes", "Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] },
+          { k: "Leucocitos", unit: "", normal: "2-4/campo", type: "text" },
+          { k: "Levaduras", unit: "", normal: "Ausentes/No se observan", type: "select", options: ["Ausentes", "Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] },
+          { k: "Trichomonas vaginalis", unit: "", normal: "Ausentes/No se observan", type: "select", options: ["Ausentes", "Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] },
+          { k: "Bacterias", unit: "", normal: "Ausentes/No se observan", type: "select", options: ["Ausentes", "Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] },
+          { k: "Células clave/Clue cells", unit: "", normal: "No se observaron", type: "select", options: ["Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] },
+          { k: "Hematíes", unit: "", normal: "Ausentes/No se observan", type: "text" },
+          { k: "PH", unit: "", normal: "3.8 - 4.5", type: "text" },
+          { k: "Test de Aminas", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Positivo"] }
+        ]
+      },
+      gramU: {
+        title: "Tinción de Gram", params: [
+          { k: "Bacterias", unit: "", normal: "Resultados normales: Indican la ausencia de bacterias/levaduras. [[br]]Resultados anormales: La presencia de bacterias (cocos o bacilos), su agrupación (cadenas o pares)  o presencia de levaduras.", type: "text", placeholder: "Ej: Gram positivas en cadenas" },
+          { k: "Levaduras", unit: "", normal: "Resultados normales: Indican la ausencia de bacterias/levaduras. [[br]]Resultados anormales: La presencia de bacterias (cocos o bacilos), su agrupación (cadenas o pares)  o presencia de levaduras.", type: "select", options: ["Ausentes", "Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] },
+          { k: "Clue cells", unit: "", normal: "No se observaron, escasas, moderadas o abundantes", type: "select", options: ["No se observan", "Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] }
+        ]
+      },
+      antigenosU: {
+        title: "Prueba de detección de antígenos", params: [
+          { k: "Candida albicans", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Trichomonas vaginalis", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Gardnerella vaginalis", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Chlamydia trachomatis", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Otros Hallazgos", unit: "", normal: "---------------", type: "text" },
+          { k: "Diagnostico/comentario final:", unit: "", normal: "Normal: No se detectan signos de infección o microorganismos anormales. ,[[br]]Anormal: Se reporta la presencia de bacterias, levaduras, trichomonas,chlamydia, células clave, un recuento elevado de glóbulos blancos, un pH elevado o un olor a pescado. ", type: "text" }
+        ]
+      }
+    }
+  },
 
   urinalysis: {
-    id:"urinalysis", icon:"🧪", title:"ORINA",
-    sections:{
-      macroscopico: {title:"I. Macroscópico", params:[
-        {k: "Color",unit: "",normal: "Amarillo claro/ámbar",type: "select",options: ["Transparente","Amarillo pálido","Amarillo claro","Ámbar","Naranja","Marrón oscuro","Rojizo/Rosa","Verde/Azul","Turbio/Lechoso","Negro","Otro"],bind: "colorMacro"},
-        {k:"Aspecto", unit:"", normal:"Transparente/Claro", type:"select", options:["Transparente","Claro","Turbio","Poco turbio","muy turbio","Opalescente"]},
-      ]},
-      quimico: {title:"II. Químico", params:[
-        {k:"Gravedad Específica", unit:"", normal:"1.003-1.035", type:"text"},
-        {k:"pH", unit:"", normal:"5.0-7.0", type:"text"},
-        {k:"Leucocitos", unit:"", normal:"Negativo", type:"select", options:["Negativo","Positivo (+)","Positivo (++)","Positivo (+++)","Positivo (++++)","Traza"]},
-        {k:"Nitratos", unit:"", normal:"Negativo", type:"select", options:["Negativo","Positivo"]},
-        {k:"Proteínas", unit:"", normal:"Negativo", type:"select", options:["Negativo","Traza","Positivo (+)","Positivo (++)","Positivo (+++)","Positivo (++++)"]},
-        {k:"Glucosa", unit:"", normal:"Normal", type:"select", options:["Normal","Anormal","Positivo (+)","Positivo (++)","Positivo (+++)","Positivo (++++)"]},
-        {k:"Cetonas", unit:"", normal:"Negativo", type:"select", options:["Negativo","Positivo","Positivo (+)","Positivo (++)","Positivo (+++)","Positivo (++++)"]},
-        { k:"Urobilinógeno", unit:"", normal:"Normal", type:"select", options:["Normal","Elevado","Bajo","Positivo (+)","Positivo (++)","Positivo (+++)","Otro"], bind:"urobilinogeno" },
-        { k:"Bilirrubina", unit:"", normal:"Negativo", type:"select", options:["Negativo","Positivo (+)","Positivo (++)","Positivo (+++)","Positivo (++++)"] },
-        { k:"Sangre", unit:"", normal:"Negativo", type:"select", options:["Negativo","Positivo","Hemólisis","Positivo (+)","Positivo (++)","Positivo (+++)","Positivo (++++)"] }
-            ]},
-      microscopico: { title:"III. Microscópico", params:[
-        { k:"Leucocitos", unit:"", normal:"0-5 por campo", type:"text" },
-        { k:"Eritrocitos", unit:"", normal:"0-2 por campo", type:"text" },
-        { k:"Células Epiteliales", unit:"", normal:"Ausentes/Escasas", type:"select", options:["Ausentes","Escasas","Moderadas","Abundantes"] },
-        { k:"Bacteria", unit:"", normal:"Ausentes", type:"select", options:["Ausentes","Escasas (+)","Moderadas (++)","Abundantes (+++)"] },
-        { k:"Trichomonas", unit:"", normal:"Ausentes", type:"select", options:["Ausentes","Escasas (+)","Moderadas (++)","Abundantes (+++)"] },
-        { k:"Levaduras", unit:"", normal:"Ausentes", type:"select", options:["Ausentes","Escasas (+)","Moderadas (++)","Abundantes (+++)"] },
-        { k:"Cristales", unit:"", normal:"Ausentes", type:"select", options:["Ausentes","Oxalato","Fosfatos","Urato","Cistina"] },
-        { k:"Cilindros", unit:"", normal:"Ausentes", type:"select", options:["Ausentes","Hialinos","Granulosos","Leucocitarios","Eritrocitarios"] },
-        { k:"Filamento mucoso", unit:"", normal:"Ausentes", type:"select", options:["Ausentes","Escasos","Moderados","Abundantes"] },
-        { k:"Otros hallazgos", unit:"", normal:"", type:"text", placeholder:"Cualquier otro hallazgo" }
-            ]}
+    id: "urinalysis", icon: "🧪", title: "ORINA",
+    sections: {
+      macroscopico: {
+        title: "I. Macroscópico", params: [
+          { k: "Color", unit: "", normal: "Amarillo claro/ámbar", type: "select", options: ["Transparente", "Amarillo pálido", "Amarillo claro", "Ámbar", "Naranja", "Marrón oscuro", "Rojizo/Rosa", "Verde/Azul", "Turbio/Lechoso", "Negro", "Otro"], bind: "colorMacro" },
+          { k: "Aspecto", unit: "", normal: "Transparente/Claro", type: "select", options: ["Transparente", "Claro", "Turbio", "Poco turbio", "muy turbio", "Opalescente"] },
+        ]
+      },
+      quimico: {
+        title: "II. Químico", params: [
+          { k: "Gravedad Específica", unit: "", normal: "1.003-1.035", type: "text" },
+          { k: "pH", unit: "", normal: "5.0-7.0", type: "text" },
+          { k: "Leucocitos", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Positivo (+)", "Positivo (++)", "Positivo (+++)", "Positivo (++++)", "Traza"] },
+          { k: "Nitratos", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Proteínas", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Traza", "Positivo (+)", "Positivo (++)", "Positivo (+++)", "Positivo (++++)"] },
+          { k: "Glucosa", unit: "", normal: "Normal", type: "select", options: ["Normal", "Anormal", "Positivo (+)", "Positivo (++)", "Positivo (+++)", "Positivo (++++)"] },
+          { k: "Cetonas", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Positivo", "Positivo (+)", "Positivo (++)", "Positivo (+++)", "Positivo (++++)"] },
+          { k: "Urobilinógeno", unit: "", normal: "Normal", type: "select", options: ["Normal", "Elevado", "Bajo", "Positivo (+)", "Positivo (++)", "Positivo (+++)", "Otro"], bind: "urobilinogeno" },
+          { k: "Bilirrubina", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Positivo (+)", "Positivo (++)", "Positivo (+++)", "Positivo (++++)"] },
+          { k: "Sangre", unit: "", normal: "Negativo", type: "select", options: ["Negativo", "Positivo", "Hemólisis", "Positivo (+)", "Positivo (++)", "Positivo (+++)", "Positivo (++++)"] }
+        ]
+      },
+      microscopico: {
+        title: "III. Microscópico", params: [
+          { k: "Leucocitos", unit: "", normal: "0-5 por campo", type: "text" },
+          { k: "Eritrocitos", unit: "", normal: "0-2 por campo", type: "text" },
+          { k: "Células Epiteliales", unit: "", normal: "Ausentes/Escasas", type: "select", options: ["Ausentes", "Escasas", "Moderadas", "Abundantes"] },
+          { k: "Bacteria", unit: "", normal: "Ausentes", type: "select", options: ["Ausentes", "Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] },
+          { k: "Trichomonas", unit: "", normal: "Ausentes", type: "select", options: ["Ausentes", "Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] },
+          { k: "Levaduras", unit: "", normal: "Ausentes", type: "select", options: ["Ausentes", "Escasas (+)", "Moderadas (++)", "Abundantes (+++)"] },
+          { k: "Cristales", unit: "", normal: "Ausentes", type: "select", options: ["Ausentes", "Oxalato", "Fosfatos", "Urato", "Cistina"] },
+          { k: "Cilindros", unit: "", normal: "Ausentes", type: "select", options: ["Ausentes", "Hialinos", "Granulosos", "Leucocitarios", "Eritrocitarios"] },
+          { k: "Filamento mucoso", unit: "", normal: "Ausentes", type: "select", options: ["Ausentes", "Escasos", "Moderados", "Abundantes"] },
+          { k: "Otros hallazgos", unit: "", normal: "", type: "text", placeholder: "Cualquier otro hallazgo" }
+        ]
+      }
     }
   },
 
   pruebas_rapidas: {
-    id:"pruebas_rapidas", icon:"⚡", title:"INMUNOLOGIA RAPIDA",
-    sections:{
-      PruebasRapidas: { title:"Pruebas Rapidas", params:[
-        { k:"Chlamydia trachomatis", unit:"", normal:"", type:"select", options:["IgG Positivo","IgM Positivo","IgG e IgM Positivos","Negativo"] },
-        { k:"Rubeola", unit:"", normal:"", type:"select", options:["IgG Positivo","IgM Positivo","IgG e IgM Positivos","Negativo"] },
-        { k:"Salmonella/Tifoidea", unit:"", normal:"", type:"select", options:["IgG Positivo","IgM Positivo","IgG e IgM Positivos","Negativo"] },
-        { k:"Toxoplasmosis", unit:"", normal:"", type:"select", options:["IgG Positivo","IgM Positivo","IgG e IgM Positivos","Negativo"] },
-        { k:"Tuberculosis", unit:"", normal:"", type:"select", options:["IgG Positivo","IgM Positivo","IgG e IgM Positivos","Negativo"] },
-        { k:"Helicobacter pylori", unit:"", normal:"", type:"select", options:["IgG Positivo","IgM Positivo","IgG e IgM Positivos","Negativo","Positivo"] },
-        { k:"Troponina", unit:"", normal:"", type:"select", options:["Positivo","Negativo"] },
-        { k:"Factor Reumatoide (FR)", unit:"", normal:"", type:"select", options:["Negativo","Positivo (+)","Positivo (++)","Positivo (+++)"] },
-        { k:"Antiestreptolisina O (ASO)", unit:"", normal:"", type:"select", options:["Negativo","Positivo (+)","Positivo (++)","Positivo (+++)"] },
-        { k:"Proteína C Reactiva cualitativa (PCR)", unit:"", normal:"", type:"select", options:["Negativo","Positivo (+)","Positivo (++)","Positivo (+++)"] },
-        { k:"Sangre oculta en heces fecales (FOB)", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-        { k:"Embarazo/hormona Gonadotropina Coriónica Humana (hCG)", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-        { k:"Hepatitis B / (HBsAg)-Detección cualitativa del antígeno de Superficie", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-        { k:"Hepatitis C / (VHC)-Detección cualitativa del anticuerpo del virus", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-        { k:"Brucella abortus", unit:"", normal:"", type:"select", options:["Negativo","Positivo (+)","Positivo (++)","Positivo (+++)"] },
-        { k:"VIH (Virus de Inmunodeficiencia Humana) / Detección cualitativa del anticuerpo de VIH", unit:"", normal:"", type:"select", options:["Negativo"] },
-        { k:"VIH (Virus de Inmunodeficiencia Humana) / Confirmación cualitativa del anticuerpo de VIH", unit:"", normal:"Resultado confirmado: [[br]]PRUEBA DE DETERMINE (Positivo) -  VIH[[br]]PRUEBA DE UNI-GOLD (Positivo)  - VIH[[br]]PRUEBA DE BIOLINE ABOTT - VIH (Positivo)", type:"select", options:["POSITIVO - TIPO 1","POSITIVO - TIPO 2","POSITIVO - TIPO 1 y 2"] },
-        { k:"Sífilis / Prueba Treponémica (Determinación de anticuerpos)-PT", unit:"", normal:"PT (+) y PNT (+): sugiere una infección de sífilis activa. [[br]]PT (+) y PNT (-): sugiere una infección de sífilis reciente o tratada. [[br]]PT (-) y PNT (-): Indica ausencia de infección por sífilis.", type:"select", options:["Negativo","Positivo"] },
-        { k:"Sífilis / Prueba no Treponémica (RPR)-PNT", unit:"", normal:"PT (+) y PNT (+): sugiere una infección de sífilis activa. [[br]]PT (+) y PNT (-): sugiere una infección de sífilis reciente o tratada. [[br]]PT (-) y PNT (-): Indica ausencia de infección por sífilis.", type:"select", options:["Negativo","Positivo (+)","Positivo (++)","Positivo (+++)"] }
-            ]}
-            }
-        },
+    id: "pruebas_rapidas", icon: "⚡", title: "INMUNOLOGIA RAPIDA",
+    sections: {
+      PruebasRapidas: {
+        title: "Pruebas Rapidas", params: [
+          { k: "Chlamydia trachomatis", unit: "", normal: "", type: "select", options: ["IgG Positivo", "IgM Positivo", "IgG e IgM Positivos", "Negativo"] },
+          { k: "Rubeola", unit: "", normal: "", type: "select", options: ["IgG Positivo", "IgM Positivo", "IgG e IgM Positivos", "Negativo"] },
+          { k: "Salmonella/Tifoidea", unit: "", normal: "", type: "select", options: ["IgG Positivo", "IgM Positivo", "IgG e IgM Positivos", "Negativo"] },
+          { k: "Toxoplasmosis", unit: "", normal: "", type: "select", options: ["IgG Positivo", "IgM Positivo", "IgG e IgM Positivos", "Negativo"] },
+          { k: "Tuberculosis", unit: "", normal: "", type: "select", options: ["IgG Positivo", "IgM Positivo", "IgG e IgM Positivos", "Negativo"] },
+          { k: "Helicobacter pylori", unit: "", normal: "", type: "select", options: ["IgG Positivo", "IgM Positivo", "IgG e IgM Positivos", "Negativo", "Positivo"] },
+          { k: "Troponina", unit: "", normal: "", type: "select", options: ["Positivo", "Negativo"] },
+          { k: "Factor Reumatoide (FR)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo (+)", "Positivo (++)", "Positivo (+++)"] },
+          { k: "Antiestreptolisina O (ASO)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo (+)", "Positivo (++)", "Positivo (+++)"] },
+          { k: "Proteína C Reactiva cualitativa (PCR)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo (+)", "Positivo (++)", "Positivo (+++)"] },
+          { k: "Sangre oculta en heces fecales (FOB)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Embarazo/hormona Gonadotropina Coriónica Humana (hCG)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Hepatitis B / (HBsAg)-Detección cualitativa del antígeno de Superficie", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Hepatitis C / (VHC)-Detección cualitativa del anticuerpo del virus", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Brucella abortus", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo (+)", "Positivo (++)", "Positivo (+++)"] },
+          { k: "VIH (Virus de Inmunodeficiencia Humana) / Detección cualitativa del anticuerpo de VIH", unit: "", normal: "", type: "select", options: ["Negativo"] },
+          { k: "VIH (Virus de Inmunodeficiencia Humana) / Confirmación cualitativa del anticuerpo de VIH", unit: "", normal: "Resultado confirmado: [[br]]PRUEBA DE DETERMINE (Positivo) -  VIH[[br]]PRUEBA DE UNI-GOLD (Positivo)  - VIH[[br]]PRUEBA DE BIOLINE ABOTT - VIH (Positivo)", type: "select", options: ["POSITIVO - TIPO 1", "POSITIVO - TIPO 2", "POSITIVO - TIPO 1 y 2"] },
+          { k: "Sífilis / Prueba Treponémica (Determinación de anticuerpos)-PT", unit: "", normal: "PT (+) y PNT (+): sugiere una infección de sífilis activa. [[br]]PT (+) y PNT (-): sugiere una infección de sífilis reciente o tratada. [[br]]PT (-) y PNT (-): Indica ausencia de infección por sífilis.", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Sífilis / Prueba no Treponémica (RPR)-PNT", unit: "", normal: "PT (+) y PNT (+): sugiere una infección de sífilis activa. [[br]]PT (+) y PNT (-): sugiere una infección de sífilis reciente o tratada. [[br]]PT (-) y PNT (-): Indica ausencia de infección por sífilis.", type: "select", options: ["Negativo", "Positivo (+)", "Positivo (++)", "Positivo (+++)"] }
+        ]
+      }
+    }
+  },
   drogas: {
-    id:"drogas", icon:"💊", title:"TEST-ABUSO DE DROGAS EN ORINA",
-    sections:{
-      panel_drogas: { title:"Panel de Drogas", params:[
-      { k:"Anfetamina (AMP)", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-      { k:"Etilglucurónido (ETG)", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-      { k:"Metanfetamina (MET)", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-      { k:"Cocaína (COC)", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-      { k:"D-Amphetamine (MAMP)", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-      { k:"Morfina (MOR)", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-      { k:"Marihuana (THC)", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-      { k:"Benzodiacepina (BZD/BZO)", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-      { k:"Barbitúricos (BAR)", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-      { k:"Éxtasis (XTC)", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-      { k:"Fenciclidina (PCP)", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-      { k:"Methadone (MTD)", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] },
-      { k:"Tricyclic Antidepressant (TCA)", unit:"", normal:"", type:"select", options:["Negativo","Positivo"] }
-       ]}
+    id: "drogas", icon: "💊", title: "TEST-ABUSO DE DROGAS EN ORINA",
+    sections: {
+      panel_drogas: {
+        title: "Panel de Drogas", params: [
+          { k: "Anfetamina (AMP)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Etilglucurónido (ETG)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Metanfetamina (MET)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Cocaína (COC)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "D-Amphetamine (MAMP)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Morfina (MOR)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Marihuana (THC)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Benzodiacepina (BZD/BZO)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Barbitúricos (BAR)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Éxtasis (XTC)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Fenciclidina (PCP)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Methadone (MTD)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] },
+          { k: "Tricyclic Antidepressant (TCA)", unit: "", normal: "", type: "select", options: ["Negativo", "Positivo"] }
+        ]
+      }
     }
   },
   diabetis: {
-    id:"diabetis", icon:"🩸🍬", title:"ESTUDIO DE DIABETIS",
-    sections:{
-      glucosa: { title:"Curva de Tolerancia a la Glucosa - en Ayunas y Post Carga", params:[
-      { k:"Glicemia en ayunas/basal", unit:"mg/dL", normal:"<105(Mujer Embarazada)", type:"text" },
-      { k:"Glicemia a la primera hora post carga de 75 grs", unit:"mg/dL", normal:"≤180", type:"text" },
-      { k:"Glicemia a la segunda hora post carga 75 grs", unit:"mg/dL", normal:"<140", type:"text" }
-      ]},
-      glicemia: { title:"Determinación de Glicemia en Ayunas y Post Prandial", params:[
-      { k:"Glicemia en ayunas", unit:"mg/dL", normal:"<100", type:"text" },
-      { k:"Glicemia postprandial (2 horas después de comer)", unit:"mg/dL", normal:"<140", type:"text" }
-            ]}
-          }
-        },
+    id: "diabetis", icon: "🩸🍬", title: "ESTUDIO DE DIABETIS",
+    sections: {
+      glucosa: {
+        title: "Curva de Tolerancia a la Glucosa - en Ayunas y Post Carga", params: [
+          { k: "Glicemia en ayunas/basal", unit: "mg/dL", normal: "<105(Mujer Embarazada)", type: "text" },
+          { k: "Glicemia a la primera hora post carga de 75 grs", unit: "mg/dL", normal: "≤180", type: "text" },
+          { k: "Glicemia a la segunda hora post carga 75 grs", unit: "mg/dL", normal: "<140", type: "text" }
+        ]
+      },
+      glicemia: {
+        title: "Determinación de Glicemia en Ayunas y Post Prandial", params: [
+          { k: "Glicemia en ayunas", unit: "mg/dL", normal: "<100", type: "text" },
+          { k: "Glicemia postprandial (2 horas después de comer)", unit: "mg/dL", normal: "<140", type: "text" }
+        ]
+      }
+    }
+  },
   biologicos: {
-    id:"biologicos", icon:"🧪", title:"LIQUIDOS BIOLOGICOS",
-    sections:{
-      cefalorraquideo: {title:"LIQUIDO CEFALORRAQUIDEO (LCR)", params:[
-        {k: "I.	EXAMEN MACROSCOPICO",unit: "",normal: "",type: ""},
-        {k:"Aspecto", unit:"", normal:"Claro y cristalino", type:"select", options:["Normal","Claro","Claro y cristalino","Turbio","Poco turbio","muy turbio","Lechoso","Sanguinolento"]},
-        {k:"Color", unit:"", normal:"Incoloro", type:"select", options:["Xantocromico","Anaranjado","Amarillo","Rosa","Rojo","Marrón","Incoloro"]},
-        {k: "II. EXAMEN MICROCOSPICO (análisis citológico)",unit: "",normal: "",type: ""},
-        {k:"Hematíes", unit:"", normal:"0-5 por campo", type:"text"},
-        {k:"Leucocitos", unit:"", normal:"0-5 por campo", type:"text"},
-        {k:"Diferencial de leucocitos", unit:"", normal:"Linfocitos 60-70% [[br]]Monocitos 20-30% [[br]]Neutrófilos 0-10%", type:"text"},
-        {k:"Tinción de Gram", unit:"", normal:"0-5 por campo", type:"text"},
-        {k:"Tinta China/Antigenos de Cryptococcus", unit:"", normal:"", type:"select"},
-        {k:"Tincion de Giemsa", unit:"", normal:"", type:"select"},
-        {k:"Otras células", unit:"", normal:"", type:"text"},
-        {k: "III.	EXAMEN QUIMICO",unit: "",normal: "",type: ""},
-        {k:"Proteínas totales", unit:"mg/dL", normal:"15.0-40.0", type:"text"},
-        {k:"Albumina", unit:"mg/dL", normal:"17.7-25.1", type:"text"},
-        {k:"Glucosa", unit:"mg/dL", normal:"60-80 (niños) [[br]]40-70 (adultos)", type:"text"},
-        {k:"Lactato", unit:"mEq/L", normal:"10-22", type:"text"},
-        {k:"Glutamina", unit:"mg/dL", normal:"8-19", type:"text"},
-        {k:"Indice de albumina", unit:"", normal:"", type:"text"},
-        {k:"COMENTARIOS", unit:"", normal:"", type:"text"},
-      ]},
-        sinovial: {title:"LIQUIDO SINOVIAL", params:[
-        {k: "I.	EXAMEN MACROSCOPICO",unit: "",normal: "",type: ""},
-        {k:"Aspecto", unit:"", normal:"Claro y cristalino", type:"select", options:["Normal","Claro","Claro y cristalino","Turbio","Poco turbio","muy turbio","Lechoso","Sanguinolento"]},
-        {k:"Color", unit:"", normal:"Amarillo Palido", type:"select", options:["Amarillo pálido","Amarillo claro","Ámbar","Naranja","Marrón oscuro","Rojizo/Rosa","Verde/Azul","Turbio/Lechoso","Negro"]},
-        {k:"Viscosidad (cm)", unit:"", normal:"3-6", type:"text"},
-        {k:"Volumen (ml)", unit:"", normal:"<3.5", type:"text"},
-        {k:"pH", unit:"", normal:"", type:"text"},
-        {k:"Densidad", unit:"", normal:"", type:"text"},
-        {k: "II. EXAMEN MICROCOSPICO (análisis citológico)",unit: "",normal: "",type: ""},
-        {k:"Hematíes", unit:"", normal:"0-5 por campo", type:"text"},
-        {k:"Leucocitos", unit:"", normal:"0-5 por campo", type:"text"},
-        {k:"Cristales", unit:"", normal:"", type:"select", options:["Ausentes","Oxalato","Fosfatos","Urato","Cistina"]},
-        {k:"Diferencial de leucocitos", unit:"", normal:"Linfocitos 60-70% [[br]]Monocitos 20-30% [[br]]Neutrófilos 0-10%", type:"text"},
-        {k:"Tinción de Gram", unit:"", normal:"0-5 por campo", type:"text"},
-        {k:"Otras células", unit:"", normal:"", type:"text"},
-        {k: "III.	EXAMEN QUIMICO",unit: "",normal: "",type: ""},
-        {k:"Proteínas totales", unit:"mg/dL", normal:"1-3", type:"text"},
-        {k:"Glucosa", unit:"mg/dL", normal:"0-20", type:"text"},
-        {k:"Ácido úrico", unit:"mg/dL", normal:"6-8", type:"text"},
-        {k:"COMENTARIOS", unit:"", normal:"", type:"text"},
-      ]},
-      pleural: {title:"LIQUIDO PLEURAL", params:[
-        {k: "I.	EXAMEN MACROSCOPICO",unit: "",normal: "",type: ""},
-        {k:"Aspecto", unit:"", normal:"Claro y cristalino", type:"select", options:["Purulento","Claro y cristalino","Hemático","Lipemico","Viscoso "]},
-        {k:"Color", unit:"", normal:"", type:"select", options:["Amarillo pálido","Amarillo claro","Ámbar","Naranja","Marrón oscuro","Rojizo/Rosa","Verde/Azul","Turbio/Lechoso","Negro"]},
-        {k:"Volumen (ml)", unit:"", normal:"7.5", type:"text"},
-        {k:"pH", unit:"", normal:"", type:"text"},
-        {k: "II. EXAMEN MICROCOSPICO (análisis citológico)",unit: "",normal: "",type: ""},
-        {k:"Hematíes", unit:"", normal:"0-5 por campo", type:"text"},
-        {k:"Leucocitos", unit:"", normal:"0-5 por campo", type:"text"},
-        {k:"Diferencial de leucocitos", unit:"", normal:"Linfocitos 60-70% [[br]]Monocitos 20-30% [[br]]Neutrófilos 0-10%", type:"text"},
-        {k:"Tinción de Gram", unit:"", normal:"0-5 por campo", type:"text"},
-        {k:"Otras células", unit:"", normal:"", type:"text"},
-        {k: "III.	EXAMEN QUIMICO",unit: "",normal: "",type: ""},
-        {k:"Proteínas totales (PT)", unit:"g/dL", normal:"1-3", type:"text"},
-        {k:"Lactato deshidrogenasa (LDH)", unit:"UI/L", normal:"", type:"text"},
-        {k:"Cociente de PT", unit:"", normal:"< 0.5 = Transudado [[br]]> 0.5 = Exudado", type:"text"},
-        {k:"Cociente de LDH",  unit:"", normal:"< 0.6 = Transudado [[br]]> 0.6 = Exudado", type:"text"},
-        {k:"Amilasa", unit:"mg/dL", normal:"6-8", type:"text"},
-        {k:"Glucosa", unit:"mg/dL", normal:"", type:"text"},
-        {k:"COMENTARIOS", unit:"", normal:"", type:"text"},
-      ]},
-      ascitico: {title:"LIQUIDO ASCITICO", params:[
-        {k: "I.	EXAMEN MACROSCOPICO",unit: "",normal: "",type: ""},
-        {k:"Aspecto", unit:"", normal:"Claro y cristalino", type:"select", options:["Purulento","Claro y cristalino","Hemático","Lipemico","Viscoso","Transparente"]},
-        {k:"Color", unit:"", normal:"Amarillo Pálido", type:"select", options:["Amarillo pálido","Amarillo claro","Ámbar","Naranja","Marrón oscuro","Rojizo/Rosa","Verde/Azul","Turbio/Lechoso","Negro"]},
-        {k:"Volumen (ml)", unit:"", normal:"7.5", type:"text"},
-        {k:"pH", unit:"", normal:"", type:"text"},
-        {k: "II. EXAMEN MICROCOSPICO (análisis citológico)",unit: "",normal: "",type: ""},
-        {k:"Hematíes", unit:"", normal:"0-5 por campo", type:"text"},
-        {k:"Leucocitos", unit:"", normal:"0-5 por campo", type:"text"},
-        {k:"Diferencial de leucocitos", unit:"", normal:"Linfocitos 60-70% [[br]]Monocitos 20-30% [[br]]Neutrófilos 0-10%", type:"text"},
-        {k:"Tinción de Gram", unit:"", normal:"0-5 por campo", type:"text"},
-        {k:"Otras células", unit:"", normal:"", type:"text"},
-        {k: "III.	EXAMEN QUIMICO",unit: "",normal: "",type: ""},
-        {k:"Proteínas totales (PT)", unit:"g/dL", normal:"< 2.5 = Transudado [[br]]≥ 2.5 = Exusudado", type:"text"},
-        {k:"Lactato deshidrogenasa (LDH)", unit:"UI/L", normal:"", type:"text"},
-        {k:"Gradiente Seroascítico de Albúmina (GASA)", unit:"mg/dL", normal:"≥ 1.1 g/dL (sugiere hipertensión portal) [[br]]< 1.1 g/dL (sugiere otras causas como pérdida de proteínas o enfermedad peritoneal).", type:"text"},
-        {k:"Cociente de LDH",  unit:"", normal:"< 0.6 = Transudado [[br]]> 0.6 = Exudado  [[br]]> 1 (sugiere infección o neoplasia).", type:"text"},
-        {k:"albumina", unit:"mg/dL", normal:"", type:"text"},
-        {k:"Glucosa", unit:"mg/dL", normal:"Valor similar al del suero/plasma.", type:"text"},
-        {k:"COMENTARIOS", unit:"", normal:"", type:"text"},
-      ]},
-      amniotico: {title:"LIQUIDO AMNIOTICO", params:[
-        {k: "I.	EXAMEN MACROSCOPICO",unit: "",normal: "",type: ""},
-        {k:"Aspecto", unit:"", normal:"Claro y cristalino", type:"select", options:["Purulento","Claro y cristalino","Hemático","Lipemico","Viscoso","Transparente"]},
-        {k:"Color", unit:"", normal:"Amarillo Pálido", type:"select", options:["Amarillo pálido","Amarillo fuerte","Verde","Naranja","Marrón oscuro","Rosado","rojizo","Rojo","Negro"]},
-        {k: "II. EXAMEN MICROCOSPICO (análisis citológico)",unit: "",normal: "",type: ""},
-        {k:"Células anaranjadas", unit:"", normal:"0-5 por campo", type:"text"},
-        {k:"Tinción de Gram", unit:"", normal:"0-5 por campo", type:"text"},
-        {k:"Otras células", unit:"", normal:"", type:"text"},
-        {k: "III.	EXAMEN QUIMICO",unit: "",normal: "",type: ""},
-        {k:"Fosfolipidos", unit:"", normal:"", type:"text"},
-        {k:"Glucosa", unit:"mg/dL", normal:"< 16 (nivel indicativo de infección)", type:"text"},
-        {k:"Bilirrubina total", unit:"mg/d", normal:"10-30 (0.01-0.03)", type:"text"},
-        {k:"COMENTARIOS", unit:"", normal:"", type:"text"},
-      ]},
+    id: "biologicos", icon: "🧪", title: "LIQUIDOS BIOLOGICOS",
+    sections: {
+      cefalorraquideo: {
+        title: "LIQUIDO CEFALORRAQUIDEO (LCR)", params: [
+          { k: "I.	EXAMEN MACROSCOPICO", unit: "", normal: "", type: "" },
+          { k: "Aspecto", unit: "", normal: "Claro y cristalino", type: "select", options: ["Normal", "Claro", "Claro y cristalino", "Turbio", "Poco turbio", "muy turbio", "Lechoso", "Sanguinolento"] },
+          { k: "Color", unit: "", normal: "Incoloro", type: "select", options: ["Xantocromico", "Anaranjado", "Amarillo", "Rosa", "Rojo", "Marrón", "Incoloro"] },
+          { k: "II. EXAMEN MICROCOSPICO (análisis citológico)", unit: "", normal: "", type: "" },
+          { k: "Hematíes", unit: "", normal: "0-5 por campo", type: "text" },
+          { k: "Leucocitos", unit: "", normal: "0-5 por campo", type: "text" },
+          { k: "Diferencial de leucocitos", unit: "", normal: "Linfocitos 60-70% [[br]]Monocitos 20-30% [[br]]Neutrófilos 0-10%", type: "text" },
+          { k: "Tinción de Gram", unit: "", normal: "0-5 por campo", type: "text" },
+          { k: "Tinta China/Antigenos de Cryptococcus", unit: "", normal: "", type: "select" },
+          { k: "Tincion de Giemsa", unit: "", normal: "", type: "select" },
+          { k: "Otras células", unit: "", normal: "", type: "text" },
+          { k: "III.	EXAMEN QUIMICO", unit: "", normal: "", type: "" },
+          { k: "Proteínas totales", unit: "mg/dL", normal: "15.0-40.0", type: "text" },
+          { k: "Albumina", unit: "mg/dL", normal: "17.7-25.1", type: "text" },
+          { k: "Glucosa", unit: "mg/dL", normal: "60-80 (niños) [[br]]40-70 (adultos)", type: "text" },
+          { k: "Lactato", unit: "mEq/L", normal: "10-22", type: "text" },
+          { k: "Glutamina", unit: "mg/dL", normal: "8-19", type: "text" },
+          { k: "Indice de albumina", unit: "", normal: "", type: "text" },
+          { k: "COMENTARIOS", unit: "", normal: "", type: "text" },
+        ]
+      },
+      sinovial: {
+        title: "LIQUIDO SINOVIAL", params: [
+          { k: "I.	EXAMEN MACROSCOPICO", unit: "", normal: "", type: "" },
+          { k: "Aspecto", unit: "", normal: "Claro y cristalino", type: "select", options: ["Normal", "Claro", "Claro y cristalino", "Turbio", "Poco turbio", "muy turbio", "Lechoso", "Sanguinolento"] },
+          { k: "Color", unit: "", normal: "Amarillo Palido", type: "select", options: ["Amarillo pálido", "Amarillo claro", "Ámbar", "Naranja", "Marrón oscuro", "Rojizo/Rosa", "Verde/Azul", "Turbio/Lechoso", "Negro"] },
+          { k: "Viscosidad (cm)", unit: "", normal: "3-6", type: "text" },
+          { k: "Volumen (ml)", unit: "", normal: "<3.5", type: "text" },
+          { k: "pH", unit: "", normal: "", type: "text" },
+          { k: "Densidad", unit: "", normal: "", type: "text" },
+          { k: "II. EXAMEN MICROCOSPICO (análisis citológico)", unit: "", normal: "", type: "" },
+          { k: "Hematíes", unit: "", normal: "0-5 por campo", type: "text" },
+          { k: "Leucocitos", unit: "", normal: "0-5 por campo", type: "text" },
+          { k: "Cristales", unit: "", normal: "", type: "select", options: ["Ausentes", "Oxalato", "Fosfatos", "Urato", "Cistina"] },
+          { k: "Diferencial de leucocitos", unit: "", normal: "Linfocitos 60-70% [[br]]Monocitos 20-30% [[br]]Neutrófilos 0-10%", type: "text" },
+          { k: "Tinción de Gram", unit: "", normal: "0-5 por campo", type: "text" },
+          { k: "Otras células", unit: "", normal: "", type: "text" },
+          { k: "III.	EXAMEN QUIMICO", unit: "", normal: "", type: "" },
+          { k: "Proteínas totales", unit: "mg/dL", normal: "1-3", type: "text" },
+          { k: "Glucosa", unit: "mg/dL", normal: "0-20", type: "text" },
+          { k: "Ácido úrico", unit: "mg/dL", normal: "6-8", type: "text" },
+          { k: "COMENTARIOS", unit: "", normal: "", type: "text" },
+        ]
+      },
+      pleural: {
+        title: "LIQUIDO PLEURAL", params: [
+          { k: "I.	EXAMEN MACROSCOPICO", unit: "", normal: "", type: "" },
+          { k: "Aspecto", unit: "", normal: "Claro y cristalino", type: "select", options: ["Purulento", "Claro y cristalino", "Hemático", "Lipemico", "Viscoso "] },
+          { k: "Color", unit: "", normal: "", type: "select", options: ["Amarillo pálido", "Amarillo claro", "Ámbar", "Naranja", "Marrón oscuro", "Rojizo/Rosa", "Verde/Azul", "Turbio/Lechoso", "Negro"] },
+          { k: "Volumen (ml)", unit: "", normal: "7.5", type: "text" },
+          { k: "pH", unit: "", normal: "", type: "text" },
+          { k: "II. EXAMEN MICROCOSPICO (análisis citológico)", unit: "", normal: "", type: "" },
+          { k: "Hematíes", unit: "", normal: "0-5 por campo", type: "text" },
+          { k: "Leucocitos", unit: "", normal: "0-5 por campo", type: "text" },
+          { k: "Diferencial de leucocitos", unit: "", normal: "Linfocitos 60-70% [[br]]Monocitos 20-30% [[br]]Neutrófilos 0-10%", type: "text" },
+          { k: "Tinción de Gram", unit: "", normal: "0-5 por campo", type: "text" },
+          { k: "Otras células", unit: "", normal: "", type: "text" },
+          { k: "III.	EXAMEN QUIMICO", unit: "", normal: "", type: "" },
+          { k: "Proteínas totales (PT)", unit: "g/dL", normal: "1-3", type: "text" },
+          { k: "Lactato deshidrogenasa (LDH)", unit: "UI/L", normal: "", type: "text" },
+          { k: "Cociente de PT", unit: "", normal: "< 0.5 = Transudado [[br]]> 0.5 = Exudado", type: "text" },
+          { k: "Cociente de LDH", unit: "", normal: "< 0.6 = Transudado [[br]]> 0.6 = Exudado", type: "text" },
+          { k: "Amilasa", unit: "mg/dL", normal: "6-8", type: "text" },
+          { k: "Glucosa", unit: "mg/dL", normal: "", type: "text" },
+          { k: "COMENTARIOS", unit: "", normal: "", type: "text" },
+        ]
+      },
+      ascitico: {
+        title: "LIQUIDO ASCITICO", params: [
+          { k: "I.	EXAMEN MACROSCOPICO", unit: "", normal: "", type: "" },
+          { k: "Aspecto", unit: "", normal: "Claro y cristalino", type: "select", options: ["Purulento", "Claro y cristalino", "Hemático", "Lipemico", "Viscoso", "Transparente"] },
+          { k: "Color", unit: "", normal: "Amarillo Pálido", type: "select", options: ["Amarillo pálido", "Amarillo claro", "Ámbar", "Naranja", "Marrón oscuro", "Rojizo/Rosa", "Verde/Azul", "Turbio/Lechoso", "Negro"] },
+          { k: "Volumen (ml)", unit: "", normal: "7.5", type: "text" },
+          { k: "pH", unit: "", normal: "", type: "text" },
+          { k: "II. EXAMEN MICROCOSPICO (análisis citológico)", unit: "", normal: "", type: "" },
+          { k: "Hematíes", unit: "", normal: "0-5 por campo", type: "text" },
+          { k: "Leucocitos", unit: "", normal: "0-5 por campo", type: "text" },
+          { k: "Diferencial de leucocitos", unit: "", normal: "Linfocitos 60-70% [[br]]Monocitos 20-30% [[br]]Neutrófilos 0-10%", type: "text" },
+          { k: "Tinción de Gram", unit: "", normal: "0-5 por campo", type: "text" },
+          { k: "Otras células", unit: "", normal: "", type: "text" },
+          { k: "III.	EXAMEN QUIMICO", unit: "", normal: "", type: "" },
+          { k: "Proteínas totales (PT)", unit: "g/dL", normal: "< 2.5 = Transudado [[br]]≥ 2.5 = Exusudado", type: "text" },
+          { k: "Lactato deshidrogenasa (LDH)", unit: "UI/L", normal: "", type: "text" },
+          { k: "Gradiente Seroascítico de Albúmina (GASA)", unit: "mg/dL", normal: "≥ 1.1 g/dL (sugiere hipertensión portal) [[br]]< 1.1 g/dL (sugiere otras causas como pérdida de proteínas o enfermedad peritoneal).", type: "text" },
+          { k: "Cociente de LDH", unit: "", normal: "< 0.6 = Transudado [[br]]> 0.6 = Exudado  [[br]]> 1 (sugiere infección o neoplasia).", type: "text" },
+          { k: "albumina", unit: "mg/dL", normal: "", type: "text" },
+          { k: "Glucosa", unit: "mg/dL", normal: "Valor similar al del suero/plasma.", type: "text" },
+          { k: "COMENTARIOS", unit: "", normal: "", type: "text" },
+        ]
+      },
+      amniotico: {
+        title: "LIQUIDO AMNIOTICO", params: [
+          { k: "I.	EXAMEN MACROSCOPICO", unit: "", normal: "", type: "" },
+          { k: "Aspecto", unit: "", normal: "Claro y cristalino", type: "select", options: ["Purulento", "Claro y cristalino", "Hemático", "Lipemico", "Viscoso", "Transparente"] },
+          { k: "Color", unit: "", normal: "Amarillo Pálido", type: "select", options: ["Amarillo pálido", "Amarillo fuerte", "Verde", "Naranja", "Marrón oscuro", "Rosado", "rojizo", "Rojo", "Negro"] },
+          { k: "II. EXAMEN MICROCOSPICO (análisis citológico)", unit: "", normal: "", type: "" },
+          { k: "Células anaranjadas", unit: "", normal: "0-5 por campo", type: "text" },
+          { k: "Tinción de Gram", unit: "", normal: "0-5 por campo", type: "text" },
+          { k: "Otras células", unit: "", normal: "", type: "text" },
+          { k: "III.	EXAMEN QUIMICO", unit: "", normal: "", type: "" },
+          { k: "Fosfolipidos", unit: "", normal: "", type: "text" },
+          { k: "Glucosa", unit: "mg/dL", normal: "< 16 (nivel indicativo de infección)", type: "text" },
+          { k: "Bilirrubina total", unit: "mg/d", normal: "10-30 (0.01-0.03)", type: "text" },
+          { k: "COMENTARIOS", unit: "", normal: "", type: "text" },
+        ]
+      },
       seminal: {
-      title: "ESPERMOGRAMA",params: [
-        { k: "I. DATOS DE LA MUESTRA", unit: "", normal: "", type: "" },
-        { k: "Fecha/Hora de Toma Muestra", unit: "", normal: "", type: "text" },
-        { k: "Hora de Inicio de Analisis", unit: "", normal: "", type: "text" },
-        { k: "Días de abstinencia", unit: "Días", normal: "3-5 días", type: "text" },
-        { k: "II. EXAMEN MACROSCÓPICO", unit: "", normal: "", type: "" },
-        { k: "Licuefacción", unit: "", normal: "30 a 60 minutos/37°C", type: "text" },
-        { k: "Color", unit: "", normal: "Blanquecino", type: "select", options: ["Blanquecino", "Amarillo", "Verde", "Marrón", "Rojo", "Transparente"] },
-        { k: "Volumen", unit: "ml", normal: "≥2.5 ml", type: "text" },
-        { k: "Aspecto", unit: "", normal: "Gris-opalescente", type: "text" },
-        { k: "Viscosidad", unit: "cm", normal: "<2 cm", type: "text" },
-        { k: "pH", unit: "", normal: "7.2-8.0", type: "text" },
+        title: "ESPERMOGRAMA", params: [
+          { k: "I. DATOS DE LA MUESTRA", unit: "", normal: "", type: "" },
+          { k: "Fecha/Hora de Toma Muestra", unit: "", normal: "", type: "text" },
+          { k: "Hora de Inicio de Analisis", unit: "", normal: "", type: "text" },
+          { k: "Días de abstinencia", unit: "Días", normal: "3-5 días", type: "text" },
+          { k: "II. EXAMEN MACROSCÓPICO", unit: "", normal: "", type: "" },
+          { k: "Licuefacción", unit: "", normal: "30 a 60 minutos/37°C", type: "text" },
+          { k: "Color", unit: "", normal: "Blanquecino", type: "select", options: ["Blanquecino", "Amarillo", "Verde", "Marrón", "Rojo", "Transparente"] },
+          { k: "Volumen", unit: "ml", normal: "≥2.5 ml", type: "text" },
+          { k: "Aspecto", unit: "", normal: "Gris-opalescente", type: "text" },
+          { k: "Viscosidad", unit: "cm", normal: "<2 cm", type: "text" },
+          { k: "pH", unit: "", normal: "7.2-8.0", type: "text" },
 
-        { k: "III. EXAMEN MICROSCÓPICO EN FRESCO - MOVILIDAD ESPERMÁTICA", unit: "", normal: "", type: "" },
-        { k: "Tipo A (Rápida y progresiva)", unit: "%", normal: "Valores de normalidad a los 60 min", type: "text" },
-        { k: "Tipo B (Progresiva lenta o perezosa)", unit: "%", normal: "Tipo A + B ≥ 50%", type: "text" },
-        { k: "Tipo C (No progresiva)", unit: "%", normal: "Tipo A ≥ 25%", type: "text" },
-        { k: "Tipo D (Inmóvil)", unit: "%", normal: "", type: "text" },
-        { k: "Presencia de Aglutinaciones y Agregaciones", unit: "", normal: "<10% (+)", type: "text" },
+          { k: "III. EXAMEN MICROSCÓPICO EN FRESCO - MOVILIDAD ESPERMÁTICA", unit: "", normal: "", type: "" },
+          { k: "Tipo A (Rápida y progresiva)", unit: "%", normal: "Valores de normalidad a los 60 min", type: "text" },
+          { k: "Tipo B (Progresiva lenta o perezosa)", unit: "%", normal: "Tipo A + B ≥ 50%", type: "text" },
+          { k: "Tipo C (No progresiva)", unit: "%", normal: "Tipo A ≥ 25%", type: "text" },
+          { k: "Tipo D (Inmóvil)", unit: "%", normal: "", type: "text" },
+          { k: "Presencia de Aglutinaciones y Agregaciones", unit: "", normal: "<10% (+)", type: "text" },
 
-        { k: "IV. EXAMEN MICROSCÓPICO EN FRESCO - VITALIDAD ESPERMÁTICA", unit: "", normal: "", type: "" },
-        { k: "Espermatozoides vivos", unit: "%", normal: ">75%", type: "text" },
+          { k: "IV. EXAMEN MICROSCÓPICO EN FRESCO - VITALIDAD ESPERMÁTICA", unit: "", normal: "", type: "" },
+          { k: "Espermatozoides vivos", unit: "%", normal: ">75%", type: "text" },
 
-        { k: "V. EXAMEN MICROSCÓPICO EN FRESCO - CONCENTRACIÓN DE ESPERMATOZOIDES", unit: "", normal: "", type: "" },
-        { k: "Concentración de Espermatozoides", unit: "mill/ml", normal: "≥20 mill/ml", type: "text" },
+          { k: "V. EXAMEN MICROSCÓPICO EN FRESCO - CONCENTRACIÓN DE ESPERMATOZOIDES", unit: "", normal: "", type: "" },
+          { k: "Concentración de Espermatozoides", unit: "mill/ml", normal: "≥20 mill/ml", type: "text" },
 
-        { k: "VI. EXAMEN MICROSCÓPICO EN FRESCO - MORFOLOGÍA ESPERMÁTICA", unit: "", normal: "", type: "" },
-        { k: "Formas Normales", unit: "%", normal: ">15%", type: "text" },
-        { k: "Anomalías Observadas", unit: "", normal: "", type: "text" },
+          { k: "VI. EXAMEN MICROSCÓPICO EN FRESCO - MORFOLOGÍA ESPERMÁTICA", unit: "", normal: "", type: "" },
+          { k: "Formas Normales", unit: "%", normal: ">15%", type: "text" },
+          { k: "Anomalías Observadas", unit: "", normal: "", type: "text" },
 
-        { k: "VII. EXAMEN MICROSCÓPICO EN FRESCO - CANTIDAD/PRESENCIA DE OTRAS CÉLULAS Y OTRAS INCLUSIONES", unit: "", normal: "", type: "" },
-        { k: "Leucocitos", unit: "/C", normal: "", type: "text" },
-        { k: "Eritrocitos", unit: "", normal: "Ausente", type: "text" },
-        { k: "Otras inclusiones", unit: "", normal: "Ausente", type: "text" },
+          { k: "VII. EXAMEN MICROSCÓPICO EN FRESCO - CANTIDAD/PRESENCIA DE OTRAS CÉLULAS Y OTRAS INCLUSIONES", unit: "", normal: "", type: "" },
+          { k: "Leucocitos", unit: "/C", normal: "", type: "text" },
+          { k: "Eritrocitos", unit: "", normal: "Ausente", type: "text" },
+          { k: "Otras inclusiones", unit: "", normal: "Ausente", type: "text" },
 
-        { k: "CONCLUSIONES", unit: "", normal: "", type: "select", options: ["Normozoospermia: Eyaculado normal definido por los valores de referencia.","Oligozoospermia: Concentración espermática menor a los valores de referencia.","Astenozoospermia: Movilidad menor al valor de referencia.","Teratozoospermia Morfología menor al valor de referencia.","Oligoastenoterato zoospermia: Significa alteraciones en tres variables. (También seusarla combinación de 2 prefijos).","Azoospermia: Ausencia de espermatozoides en el Eyaculado. Aspermia Ausencia de eyaculado.","Cryptozoospermia: Espermatozoides ausentes en el preparado examinado al fresco pero presentes en el pellet.","Hemospermia: Hematospermia; Presencia de eritrocitos en el eyaculado.","Leucospermia: Leucocitospermia, Piospermia; Presencia de leucocitos en el eyaculado por sobre el valor de referencia.","Necrozoospermia: Porcentaje de espermatozoides vivos menor al valor de referencia.","Teratoastenzoospermia: Alteración en la morfología y movilidad espermática.","Aspermia: Ausencia de eyaculado.","Terastospermia o teratozoospermia: ocurre en casos en los que el porcentaje de espermatozoides con forma anomala es mayor al 96%","Oligoasthenoteratozoospermia: Alteración en las tres variables (concentración, movilidad y morfología).","Astenospermia o astenozoospermia: Movilidad espermática menor al valor de referencia.","Oligospermia u oligozoospermia: Concentración espermática menor a los valores de referencia."]},
-        { k: "COMENTARIOS/SUGERENCIAS", unit: "", normal: "", type: "text"}
-      ]}
+          { k: "CONCLUSIONES", unit: "", normal: "", type: "select", options: ["Normozoospermia: Eyaculado normal definido por los valores de referencia.", "Oligozoospermia: Concentración espermática menor a los valores de referencia.", "Astenozoospermia: Movilidad menor al valor de referencia.", "Teratozoospermia Morfología menor al valor de referencia.", "Oligoastenoterato zoospermia: Significa alteraciones en tres variables. (También seusarla combinación de 2 prefijos).", "Azoospermia: Ausencia de espermatozoides en el Eyaculado. Aspermia Ausencia de eyaculado.", "Cryptozoospermia: Espermatozoides ausentes en el preparado examinado al fresco pero presentes en el pellet.", "Hemospermia: Hematospermia; Presencia de eritrocitos en el eyaculado.", "Leucospermia: Leucocitospermia, Piospermia; Presencia de leucocitos en el eyaculado por sobre el valor de referencia.", "Necrozoospermia: Porcentaje de espermatozoides vivos menor al valor de referencia.", "Teratoastenzoospermia: Alteración en la morfología y movilidad espermática.", "Aspermia: Ausencia de eyaculado.", "Terastospermia o teratozoospermia: ocurre en casos en los que el porcentaje de espermatozoides con forma anomala es mayor al 96%", "Oligoasthenoteratozoospermia: Alteración en las tres variables (concentración, movilidad y morfología).", "Astenospermia o astenozoospermia: Movilidad espermática menor al valor de referencia.", "Oligospermia u oligozoospermia: Concentración espermática menor a los valores de referencia."] },
+          { k: "COMENTARIOS/SUGERENCIAS", unit: "", normal: "", type: "text" }
+        ]
+      }
     }
   },
 
@@ -477,7 +536,7 @@ const REPORTS = {
 
 // Estado de la aplicación
 const state = {
-  selectedReports: new Set(['']),
+  selectedReports: new Set(),
   selectedSections: {},
   selectedParams: {}
 };
@@ -531,7 +590,7 @@ function openDB() {
   return new Promise((resolve, reject) => {
     if (dbInstance) return resolve(dbInstance);
     const req = indexedDB.open(APP_CONFIG.DB_NAME, 2);
-    
+
     req.onupgradeneeded = (e) => {
       const db = e.target.result;
       if (!db.objectStoreNames.contains(APP_CONFIG.STORE_REPORTS)) {
@@ -543,14 +602,14 @@ function openDB() {
         historyStore.createIndex('profesional', 'profesional.nombre', { unique: false });
       }
     };
-    
-    req.onsuccess = (e) => { 
-      dbInstance = e.target.result; 
-      resolve(dbInstance); 
+
+    req.onsuccess = (e) => {
+      dbInstance = e.target.result;
+      resolve(dbInstance);
     };
-    
-    req.onerror = (e) => { 
-      reject(e.target.error); 
+
+    req.onerror = (e) => {
+      reject(e.target.error);
     };
   });
 }
@@ -575,8 +634,8 @@ function validateUserInput(input) {
 }
 
 // Función para generar slug
-function slugify(s) { 
-  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '').replace(/^|_$/g, ''); 
+function slugify(s) {
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '').replace(/^|_$/g, '');
 }
 
 // Función para optimizar imágenes
@@ -587,18 +646,18 @@ function optimizeImage(imageSrc, maxWidth = 200, quality = 0.8) {
     img.onload = () => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-      
+
       let width = img.width;
       let height = img.height;
-      
+
       if (width > maxWidth) {
         height *= maxWidth / width;
         width = maxWidth;
       }
-      
+
       canvas.width = width;
       canvas.height = height;
-      
+
       ctx.drawImage(img, 0, 0, width, height);
       resolve(canvas.toDataURL('image/jpeg', quality));
     };
@@ -607,7 +666,7 @@ function optimizeImage(imageSrc, maxWidth = 200, quality = 0.8) {
 }
 
 // Función para generar código QR
-function generateQRCodeDataURL(data){
+function generateQRCodeDataURL(data) {
   if (typeof QRCode === 'undefined') {
     console.warn('Biblioteca QRCode no disponible en este contexto');
     return '';
@@ -675,7 +734,7 @@ function mostrarDescripcionSistema() {
     justify-content: center;
     z-index: 10000;
   `;
-  
+
   modal.innerHTML = `
     <div style="
       background: white;
@@ -712,7 +771,7 @@ function mostrarDescripcionSistema() {
       ">
         <p style="margin-bottom: 15px;"><strong>Sistema de Gestión de Informes de Laboratorio Clínico v1.2.2</strong></p>
         
-        <p style="margin-bottom: 15px;">Una solución integral desarrollada específicamente para <strong>Clínica Virgen de Guadalupe</strong> que permite:</p>
+        <p style="margin-bottom: 15px;">Una solución integral desarrollada específicamente para <strong>Hospital Wong</strong> que permite:</p>
         
         <ul style="margin: 15px 0; padding-left: 20px;">
           <li style="margin-bottom: 8px;">✓ Creación y gestión digital de informes de laboratorio</li>
@@ -740,9 +799,9 @@ function mostrarDescripcionSistema() {
       </div>
     </div>
   `;
-  
+
   document.body.appendChild(modal);
-  
+
   // Cerrar al hacer clic fuera del modal
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
@@ -768,7 +827,7 @@ function mostrarPoliticaPrivacidad() {
     overflow-y: auto;
     padding: 20px;
   `;
-  
+
   modal.innerHTML = `
     <div style="
       background: white;
@@ -810,7 +869,7 @@ function mostrarPoliticaPrivacidad() {
         
         <h3 style="color: #0f9d8e; margin: 25px 0 15px 0; font-size: 18px;">1. Información que Recopilamos</h3>
         
-        <p style="margin-bottom: 15px;">En Clínica Virgen de Guadalupe, nos comprometemos a proteger tu privacidad. Nuestro Sistema de Gestión de Informes Clínicos recopila únicamente los datos necesarios para la prestación de nuestros servicios:</p>
+        <p style="margin-bottom: 15px;">En Hospital Wong, nos comprometemos a proteger tu privacidad. Nuestro Sistema de Gestión de Informes Clínicos recopila únicamente los datos necesarios para la prestación de nuestros servicios:</p>
         
         <ul style="margin: 15px 0; padding-left: 20px;">
           <li style="margin-bottom: 8px;">✓ <strong>Datos de identificación del paciente:</strong> Nombre, historial clínico, edad, género</li>
@@ -876,9 +935,9 @@ function mostrarPoliticaPrivacidad() {
         
         <p style="margin-bottom: 15px;">Si tienes preguntas sobre esta Política de Privacidad o sobre cómo manejamos tus datos personales, por favor contáctanos:</p>
         
-        <p style="margin-bottom: 15px;"><strong>Email:</strong> <a href="mailto:info@clinicavirgenguadalupe.net" style="color: #0f9d8e;">info@clinicavirgenguadalupe.net</a></p>
-        <p style="margin-bottom: 15px;"><strong>Teléfono:</strong> +240 350 093 213</p>
-        <p style="margin-bottom: 15px;"><strong>Dirección:</strong> Calle Rey Malabo · MALABO</p>
+        <p style="margin-bottom: 15px;"><strong>Email:</strong> <a href="mailto:wongaprende@gmail.com" style="color: #0f9d8e;">wongaprende@gmail.com</a></p>
+        <p style="margin-bottom: 15px;"><strong>Teléfono:</strong> +240 222 282 835</p>
+        <p style="margin-bottom: 15px;"><strong>Dirección:</strong> Sumco · MALABO</p>
         
         <div style="
           text-align: center;
@@ -888,14 +947,14 @@ function mostrarPoliticaPrivacidad() {
           font-size: 12px;
           color: #888;
         ">
-          © 2025 Clínica Virgen de Guadalupe. Todos los derechos reservados.
+          © 2025 Hospital Wong. Todos los derechos reservados.
         </div>
       </div>
     </div>
   `;
-  
+
   document.body.appendChild(modal);
-  
+
   // Cerrar al hacer clic fuera del modal
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
@@ -903,6 +962,10 @@ function mostrarPoliticaPrivacidad() {
     }
   });
 }
+// Exponer al ámbito global
+window.mostrarDescripcionSistema = mostrarDescripcionSistema;
+window.mostrarPoliticaPrivacidad = mostrarPoliticaPrivacidad;
+
 
 
 // ===============================================
@@ -913,12 +976,12 @@ function mostrarPoliticaPrivacidad() {
 function renderReports() {
   reportsGrid.innerHTML = '';
   const searchTerm = document.getElementById('searchReports').value.toLowerCase();
-  
+
   Object.values(REPORTS).forEach(r => {
     if (searchTerm && !r.title.toLowerCase().includes(searchTerm)) {
       return;
     }
-    
+
     const el = document.createElement('div');
     el.className = 'report-card ' + (state.selectedReports.has(r.id) ? '' : 'inactive');
     el.innerHTML = `
@@ -926,12 +989,12 @@ function renderReports() {
         <div style="font-size:22px">${r.icon}</div>
         <div style="flex:1"><h3 style="margin:0">${r.title}</h3><div class="small">${Object.keys(r.sections).length} secciones</div></div>
         <div style="display:flex;flex-direction:column;align-items:flex-end">
-          <label class="checkbox"><input type="checkbox" class="report-chk" data-report="${r.id}" ${state.selectedReports.has(r.id)?'checked':''}></label>
+          <label class="checkbox"><input type="checkbox" class="report-chk" data-report="${r.id}" ${state.selectedReports.has(r.id) ? 'checked' : ''}></label>
         </div>
       </div>`;
     reportsGrid.appendChild(el);
   });
-  
+
   reportsGrid.querySelectorAll('.report-chk').forEach(cb => {
     cb.addEventListener('change', e => {
       const id = e.target.dataset.report;
@@ -952,7 +1015,7 @@ function renderReports() {
 function renderSectionSelectors() {
   sectionsContainer.innerHTML = '';
   const selectedReports = Array.from(state.selectedReports).map(id => REPORTS[id]);
-  
+
   if (selectedReports.length === 0) {
     sectionsContainer.innerHTML = `
       <div style="padding: 20px; text-align: center; color: #666; background: #f9fbff; border-radius: 8px; border: 2px dashed #d0e4f0;">
@@ -1086,23 +1149,23 @@ function renderSectionSelectors() {
 // Función para renderizar parámetros
 function renderParameterForms() {
   paramsContainer.innerHTML = '';
-  
+
   const mainAccordion = document.createElement('div');
   mainAccordion.className = 'card';
   mainAccordion.style.padding = '0';
-  
+
   Object.values(REPORTS).forEach(r => {
     const selected = Array.from(state.selectedSections[r.id]);
     if (selected.length === 0) return;
-    
+
     selected.forEach(secId => {
       const sec = r.sections[secId];
       if (!sec) return;
-      
+
       const sectionAccordion = document.createElement('div');
       sectionAccordion.className = 'accordion-item';
       sectionAccordion.style.borderBottom = '1px solid #e6eef8';
-      
+
       const header = document.createElement('div');
       header.className = 'accordion-header';
       header.style.cssText = `
@@ -1123,7 +1186,7 @@ function renderParameterForms() {
         </div>
         <span class="accordion-toggle" style="font-size:20px;transition:transform 0.2s">▼</span>
       `;
-      
+
       const content = document.createElement('div');
       content.className = 'accordion-content';
       content.style.cssText = `
@@ -1132,50 +1195,50 @@ function renderParameterForms() {
         overflow-y: auto;
         display: none;
       `;
-      
+
       const tbl = document.createElement('table');
       tbl.style.cssText = 'width:100%;border-collapse:separate;border-spacing:0;margin:0';
-      
+
       const thead = document.createElement('thead');
       const headerRow = document.createElement('tr');
       headerRow.style.background = '#0f9d8e';
-      
+
       const headerCell = document.createElement('th');
       headerCell.style.cssText = 'padding:8px;border-bottom:2px solid #0f9d8e;cursor:pointer;text-align:center';
-      
+
       const selectAllCheckbox = document.createElement('input');
       selectAllCheckbox.type = 'checkbox';
       selectAllCheckbox.style.cssText = 'cursor:pointer;width:18px;height:18px';
       selectAllCheckbox.id = `selectall_${r.id}_${secId}`;
       selectAllCheckbox.dataset.reportId = r.id;
       selectAllCheckbox.dataset.sectionId = secId;
-      
+
       headerCell.appendChild(selectAllCheckbox);
       headerRow.appendChild(headerCell);
-      
+
       const paramHeaderCell = document.createElement('th');
       paramHeaderCell.style.cssText = 'padding:8px;border-bottom:2px solid #0f9d8e';
       paramHeaderCell.textContent = 'PARÁMETRO';
       headerRow.appendChild(paramHeaderCell);
-      
+
       const resultHeaderCell = document.createElement('th');
       resultHeaderCell.style.cssText = 'padding:8px;border-bottom:2px solid #0b0b0b;text-align:center';
       resultHeaderCell.textContent = 'RESULTADO';
       headerRow.appendChild(resultHeaderCell);
-      
+
       const unitHeaderCell = document.createElement('th');
       unitHeaderCell.style.cssText = 'padding:8px;border-bottom:2px solid #0b0b0b;text-align:center';
       unitHeaderCell.textContent = 'UNIDAD';
       headerRow.appendChild(unitHeaderCell);
-      
+
       const normalHeaderCell = document.createElement('th');
       normalHeaderCell.style.cssText = 'padding:8px;border-bottom:2px solid #0b0b0b';
       normalHeaderCell.textContent = 'VALOR NORMAL/INTERPRETACION';
       headerRow.appendChild(normalHeaderCell);
-      
+
       thead.appendChild(headerRow);
       tbl.appendChild(thead);
-      
+
       const tbody = document.createElement('tbody');
       sec.params.forEach((p, idx) => {
         const idSafe = `inp_${r.id}_${secId}_${slugify(p.k)}`;
@@ -1190,7 +1253,7 @@ function renderParameterForms() {
 
           inputHtml = `
             <div style="display:flex;gap:6px;align-items:center">
-              <select id="${idSafe}" class="param-input" style="flex:1;padding:8px;border-radius:6px;border:1px solid #d0eaf2" data-meta='${encodeURIComponent(JSON.stringify({report:r.id,section:secId,key:p.k,unit:p.unit,normal:p.normal}))}'>
+              <select id="${idSafe}" class="param-input" style="flex:1;padding:8px;border-radius:6px;border:1px solid #d0eaf2" data-meta='${encodeURIComponent(JSON.stringify({ report: r.id, section: secId, key: p.k, unit: p.unit, normal: p.normal }))}'>
                 ${allOptions.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
               </select>
               <div style="display:flex;gap:6px;align-items:center">
@@ -1199,12 +1262,12 @@ function renderParameterForms() {
               </div>
             </div>`;
         } else {
-          inputHtml = `<input id="${idSafe}" class="param-input" type="${p.type || 'text'}" ${p.readonly ? 'readonly' : ''} placeholder="${p.placeholder || ''}" style="width:100%;padding:8px;border-radius:6px;border:1px solid #d0eaf2" data-meta='${encodeURIComponent(JSON.stringify({report:r.id,section:secId,key:p.k,unit:p.unit,normal:p.normal}))}'>`;
+          inputHtml = `<input id="${idSafe}" class="param-input" type="${p.type || 'text'}" ${p.readonly ? 'readonly' : ''} placeholder="${p.placeholder || ''}" style="width:100%;padding:8px;border-radius:6px;border:1px solid #d0eaf2" data-meta='${encodeURIComponent(JSON.stringify({ report: r.id, section: secId, key: p.k, unit: p.unit, normal: p.normal }))}'>`;
         }
 
         const checked = state.selectedParams[r.id][secId].has(p.k) ? 'checked' : '';
         const paramCheckboxId = `param_${r.id}_${secId}_${idx}`;
-        
+
         tr.innerHTML = `
           <td style="padding:8px;text-align:center"><input type="checkbox" id="${paramCheckboxId}" data-report="${r.id}" data-section="${secId}" data-param="${p.k}" ${checked}></td>
           <td style="padding:8px"><strong>${escapeHtml(p.k)}</strong></td>
@@ -1215,67 +1278,67 @@ function renderParameterForms() {
       });
       tbl.appendChild(tbody);
       content.appendChild(tbl);
-      
+
       header.addEventListener('click', () => {
         const isOpen = content.style.display === 'block';
         content.style.display = isOpen ? 'none' : 'block';
         const toggle = header.querySelector('.accordion-toggle');
         toggle.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
       });
-      
+
       header.addEventListener('mouseenter', () => {
         header.style.background = 'linear-gradient(90deg, #0d8872, #e6f3ff)';
       });
       header.addEventListener('mouseleave', () => {
         header.style.background = 'linear-gradient(90deg, #0d8872, #f1f8ff)';
       });
-      
+
       sectionAccordion.appendChild(header);
       sectionAccordion.appendChild(content);
       mainAccordion.appendChild(sectionAccordion);
     });
   });
-  
+
   paramsContainer.appendChild(mainAccordion);
-  
+
   // Eventos para checkboxes de parámetros individuales
   paramsContainer.querySelectorAll('input[id^="param_"]').forEach(paramCb => {
     paramCb.addEventListener('change', (e) => {
       const rep = e.target.dataset.report;
       const sec = e.target.dataset.section;
       const param = e.target.dataset.param;
-      
+
       if (e.target.checked) {
         state.selectedParams[rep][sec].add(param);
       } else {
         state.selectedParams[rep][sec].delete(param);
       }
-      
+
       // Actualizar selectAll checkbox
       const selectAllCb = document.getElementById(`selectall_${rep}_${sec}`);
       const allParamCbs = paramsContainer.querySelectorAll(`input[id^="param_${rep}_${sec}_"]`);
-      
+
       if (selectAllCb && allParamCbs.length > 0) {
         const allChecked = Array.from(allParamCbs).every(cb => cb.checked);
         const someChecked = Array.from(allParamCbs).some(cb => cb.checked);
-        
+
         selectAllCb.checked = allChecked;
         selectAllCb.indeterminate = someChecked && !allChecked;
       }
-      
+
       saveAppState();
     });
   });
-  
+
   // Evento para checkbox selectAll
   paramsContainer.querySelectorAll('input[id^="selectall_"]').forEach(selectAllCb => {
     selectAllCb.addEventListener('change', (e) => {
       const reportId = e.target.dataset.reportId;
       const sectionId = e.target.dataset.sectionId;
       const isChecked = e.target.checked;
-      
+
       const paramCheckboxes = paramsContainer.querySelectorAll(`input[id^="param_${reportId}_${sectionId}_"]`);
-      
+
       paramCheckboxes.forEach(cb => {
         cb.checked = isChecked;
         cb.dispatchEvent(new Event('change', { bubbles: true }));
@@ -1291,7 +1354,7 @@ function renderParameterForms() {
       const select = document.getElementById(targetId);
       const newOption = prompt('Escribe la nueva opción a añadir:');
       if (!newOption || !newOption.trim()) return;
-      
+
       const optionValue = newOption.trim();
       const existing = Array.from(select.options).map(o => o.value);
       if (existing.includes(optionValue)) {
@@ -1318,8 +1381,8 @@ function renderParameterForms() {
       const select = document.getElementById(targetId);
       if (!select) return;
       const selected = select.value;
-      if (!selected) { 
-        alert('Selecciona la opción a eliminar en el desplegable.'); 
+      if (!selected) {
+        alert('Selecciona la opción a eliminar en el desplegable.');
         return;
       }
 
@@ -1369,7 +1432,7 @@ function buildCombinedHTML() {
   const title = document.getElementById('professionalTitle').value || '';
   const notes = document.getElementById('finalNotes').value || '';
   const sig = savedSigDataUrl || sigCanvas.toDataURL();
-  
+
   // CSS mejorado para el PDF
   const css = `
     <style>
@@ -1530,7 +1593,7 @@ function buildCombinedHTML() {
 
   let html = '<!doctype html><html><head><meta charset="utf-8"><title>Informe de Laboratorio</title>' + css + '</head><body>';
   html += `<div class="paper">`;
-  
+
   // Encabezado con logo
   html += `
     <header>
@@ -1539,8 +1602,8 @@ function buildCombinedHTML() {
           <img src="${APP_CONFIG.LOGO_URL}" alt="Logo Clínica" style="width:100%;height:100%;object-fit:contain;">
         </div>
         <div>
-          <h1>CLÍNICA VIRGEN DE GUADALUPE</h1>
-          <div class="meta">Calle Rey Malabo ·Tel/fax +240 350093213 | +240 350093242</div>
+          <h1>Hospital Wong</h1>
+          <div class="meta">Sumco Malabo ·Tel +240 222 182 839</div>
         </div>
       </div>
       <div style="text-align:right">
@@ -1550,8 +1613,8 @@ function buildCombinedHTML() {
     </header>`;
 
   // Información del paciente con QR
-const qrRaw = JSON.stringify({ f: fecha, h: historial, n: nombre, e: edad, s: sexo, r: registro });
-const qrData = prepararTextoQR(qrRaw);
+  const qrRaw = JSON.stringify({ f: fecha, h: historial, n: nombre, e: edad, s: sexo, r: registro });
+  const qrData = prepararTextoQR(qrRaw);
   const qrImage = generateQRCodeDataURL(qrData);
 
   html += `
@@ -1571,35 +1634,35 @@ const qrData = prepararTextoQR(qrRaw);
       </div>
       <div style="width:96px; height:96px; border:1px solid #d0e4f0; background:#fff; padding:4px; border-radius:6px; display:flex; align-items:center; justify-content:center;">
         ${qrImage ? `<img src="${qrImage}" alt="Código QR del paciente" style="width:100%;height:100%;object-fit:contain;">`
-                   : `<div style="font-size:10px;color:#999;text-align:center;">QR<br>Code</div>`}
+      : `<div style="font-size:10px;color:#999;text-align:center;">QR<br>Code</div>`}
       </div>
     </div>`;
-  
+
   html += `<div><center><h1>INFORME DE LABORATORIO CLÍNICO</h1></center></div><br>`;
 
   // Secciones de informes
   Object.values(REPORTS).forEach(r => {
     const sel = Array.from(state.selectedSections[r.id]);
     if (sel.length === 0) return;
-    
+
     html += `<div class="section"><h2>${escapeHtml(r.title)}</h2>`;
-    
+
     sel.forEach(secId => {
       const sec = r.sections[secId];
       if (!sec) return;
-      
+
       html += `<center><h3>${escapeHtml(sec.title)}</h3></center>`;
       html += `<table><thead><tr><th>PARÁMETRO</th><th><center>RESULTADO</center></th><th><center>UNIDAD</center></th><th>VALOR NORMAL/INTERPRETACION</th></tr></thead><tbody>`;
-      
+
       sec.params.forEach(p => {
         const idSafe = `inp_${r.id}_${secId}_${slugify(p.k)}`;
         const el = document.getElementById(idSafe);
         if (!state.selectedParams[r.id][secId].has(p.k)) return;
-        
+
         const val = el ? el.value : '';
         const escapedNormal = escapeHtml(p.normal || '');
         const htmlNormal = escapedNormal.replace(/\[\[br\]\]/g, '<br>');
-        
+
         html += `<tr>
           <td><strong>${escapeHtml(p.k)}</strong></td>
           <td><center><strong>${escapeHtml(val)}</strong></center></td>
@@ -1607,10 +1670,10 @@ const qrData = prepararTextoQR(qrRaw);
           <td><strong>${htmlNormal}</strong></td>
         </tr>`;
       });
-      
+
       html += `</tbody></table>`;
     });
-    
+
     html += `</div>`;
   });
 
@@ -1619,7 +1682,7 @@ const qrData = prepararTextoQR(qrRaw);
   if (notes) {
     html += `<div class="notes"><strong>Observaciones:</strong><div>${escapeHtml(notes).replace(/\n/g, '<br>')}</div></div>`;
   }
-  
+
   html += `<div class="sig">
     <div>
       <strong>${escapeHtml(professional)}</strong>
@@ -1629,11 +1692,72 @@ const qrData = prepararTextoQR(qrRaw);
       <img src="${sig}" alt="firma">
     </div>
   </div>`;
-  
-  html += `amie</div>`;
+
   html += `</div></body></html>`;
-  
+
   return html;
+}
+
+// Función para construir JSON combinado del informe
+function buildCombinedJSON() {
+  const data = {
+    meta: {
+      fecha: document.getElementById('p_fecha').value || new Date().toISOString().split('T')[0],
+      paciente: {
+        historial: document.getElementById('p_historial').value || 'SN',
+        nombre: document.getElementById('p_nombre').value || '',
+        edad: document.getElementById('p_edad').value || '',
+        sexo: document.getElementById('p_sexo').value || '',
+        registro: document.getElementById('p_reg').value || ''
+      },
+      profesional: {
+        nombre: document.getElementById('professionalSelect').value || '',
+        cargo: document.getElementById('professionalTitle').value || ''
+      },
+      notas: document.getElementById('finalNotes').value || ''
+    },
+    informes: []
+  };
+
+  Object.values(REPORTS).forEach(r => {
+    const selSections = Array.from(state.selectedSections[r.id] || []);
+    if (selSections.length === 0) return;
+
+    const informe = {
+      id: r.id,
+      title: r.title,
+      secciones: []
+    };
+
+    selSections.forEach(secId => {
+      const sec = r.sections[secId];
+      if (!sec) return;
+
+      const seccion = {
+        id: secId,
+        title: sec.title,
+        parametros: []
+      };
+
+      sec.params.forEach(p => {
+        if (!state.selectedParams[r.id][secId].has(p.k)) return;
+        const idSafe = `inp_${r.id}_${secId}_${slugify(p.k)}`;
+        const el = document.getElementById(idSafe);
+        seccion.parametros.push({
+          nombre: p.k,
+          valor: el ? el.value : '',
+          unidad: p.unit || '',
+          normal: p.normal || ''
+        });
+      });
+
+      informe.secciones.push(seccion);
+    });
+
+    data.informes.push(informe);
+  });
+
+  return data;
 }
 
 // Función para abrir modal de vista previa
@@ -1646,25 +1770,25 @@ async function openPreviewModal() {
 
   try {
     await guardarInformeEnHistorial();
-  } catch(e) {
+  } catch (e) {
     console.error('Error al exportar JSON automático:', e);
   }
 
   const html = buildCombinedHTML();
-  
-  if (_lastPreviewBlobURL) { 
-    URL.revokeObjectURL(_lastPreviewBlobURL); 
-    _lastPreviewBlobURL = null; 
+
+  if (_lastPreviewBlobURL) {
+    URL.revokeObjectURL(_lastPreviewBlobURL);
+    _lastPreviewBlobURL = null;
   }
-  
+
   const blob = new Blob([html], { type: 'text/html' });
   const blobURL = URL.createObjectURL(blob);
   _lastPreviewBlobURL = blobURL;
-  
+
   previewFrame.src = blobURL;
   modalPreview.classList.add('open');
   modalPreview.setAttribute('aria-hidden', 'false');
-  
+
   previewFrame.onload = () => {
     conectarEventoImprimir();
     statusBox.textContent = 'Vista previa generada';
@@ -1730,21 +1854,21 @@ async function savePDF() {
   try {
     await guardarInformeEnHistorial();
     const html = buildCombinedHTML();
-    
+
     const opt = {
       margin: 6,
       filename: nombreArchivo,
       image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { 
+      html2canvas: {
         scale: 2,
         useCORS: true,
         logging: false,
         letterRendering: true
       },
-      jsPDF: { 
-        unit: 'mm', 
+      jsPDF: {
+        unit: 'mm',
         format: 'a4',
-        orientation: 'portrait' 
+        orientation: 'portrait'
       }
     };
 
@@ -1782,7 +1906,7 @@ function startDraw(e) {
   const rect = sigCanvas.getBoundingClientRect();
   const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
   const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
-  lastX = x; 
+  lastX = x;
   lastY = y;
 }
 
@@ -1795,19 +1919,19 @@ function draw(e) {
   sigCtx.moveTo(lastX, lastY);
   sigCtx.lineTo(x, y);
   sigCtx.stroke();
-  lastX = x; 
+  lastX = x;
   lastY = y;
 }
 
-function endDraw() { 
-  drawing = false; 
+function endDraw() {
+  drawing = false;
 }
 
 // Event listeners para el canvas de firma
 sigCanvas.addEventListener('mousedown', startDraw);
 sigCanvas.addEventListener('touchstart', startDraw);
 sigCanvas.addEventListener('mousemove', draw);
-sigCanvas.addEventListener('touchmove', draw, {passive:false});
+sigCanvas.addEventListener('touchmove', draw, { passive: false });
 sigCanvas.addEventListener('mouseup', endDraw);
 sigCanvas.addEventListener('mouseout', endDraw);
 sigCanvas.addEventListener('touchend', endDraw);
@@ -1816,14 +1940,14 @@ sigCanvas.addEventListener('touchend', endDraw);
 document.getElementById('sigFile').addEventListener('change', async (e) => {
   const f = e.target.files[0];
   if (!f) return;
-  
+
   const reader = new FileReader();
-  reader.onload = async function(ev) {
+  reader.onload = async function (ev) {
     try {
       const optimizedImage = await optimizeImage(ev.target.result);
       const img = new Image();
-      img.onload = function() {
-       // sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+      img.onload = function () {
+        // sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
         sigCtx.drawImage(img, 0, 0, sigCanvas.width, sigCanvas.height);
         //savedSigDataUrl = optimizedImage;
         statusBox.textContent = 'Firma cargada y optimizada';
@@ -1839,8 +1963,8 @@ document.getElementById('sigFile').addEventListener('change', async (e) => {
 
 // Event listeners para botones de firma
 //document.getElementById('clearSig').addEventListener('click', () => {
-  //sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
-  //savedSigDataUrl = '';
+//sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+//savedSigDataUrl = '';
 //});
 
 document.getElementById('saveSig').addEventListener('click', () => {
@@ -1872,7 +1996,7 @@ async function guardarInformeEnHistorial() {
       })),
       profesional: informeData.meta.profesional,
       notas: informeData.meta.notas,
-      totalParametros: informeData.informes.reduce((total, inf) => 
+      totalParametros: informeData.informes.reduce((total, inf) =>
         total + inf.secciones.reduce((sum, sec) => sum + sec.parametros.length, 0), 0)
     };
 
@@ -1880,13 +2004,13 @@ async function guardarInformeEnHistorial() {
       const tx = db.transaction(APP_CONFIG.STORE_HISTORY, 'readwrite');
       const store = tx.objectStore(APP_CONFIG.STORE_HISTORY);
       store.add(registroHistorial);
-      tx.oncomplete = () => { 
+      tx.oncomplete = () => {
         statusBox.textContent = 'Informe guardado en historial';
-        resolve(true); 
+        resolve(true);
       };
-      tx.onerror = (e) => { 
+      tx.onerror = (e) => {
         statusBox.textContent = 'Error al guardar en historial';
-        reject(e.target.error); 
+        reject(e.target.error);
       };
     });
   } catch (error) {
@@ -1902,18 +2026,18 @@ function saveAppState() {
     selectedSections: {},
     selectedParams: {}
   };
-  
+
   Object.keys(state.selectedSections).forEach(k => {
     appState.selectedSections[k] = Array.from(state.selectedSections[k]);
   });
-  
+
   Object.keys(state.selectedParams).forEach(r => {
     appState.selectedParams[r] = {};
     Object.keys(state.selectedParams[r]).forEach(s => {
       appState.selectedParams[r][s] = Array.from(state.selectedParams[r][s]);
     });
   });
-  
+
   localStorage.setItem('appState', JSON.stringify(appState));
 }
 
@@ -1921,16 +2045,16 @@ function saveAppState() {
 function loadAppState() {
   const savedState = localStorage.getItem('appState');
   if (!savedState) return;
-  
+
   try {
     const appState = JSON.parse(savedState);
-    
+
     state.selectedReports = new Set(appState.selectedReports || ['hematologia']);
-    
+
     Object.keys(appState.selectedSections || {}).forEach(k => {
       state.selectedSections[k] = new Set(appState.selectedSections[k]);
     });
-    
+
     Object.keys(appState.selectedParams || {}).forEach(r => {
       state.selectedParams[r] = {};
       Object.keys(appState.selectedParams[r]).forEach(s => {
@@ -1946,9 +2070,9 @@ function loadAppState() {
 function scheduleAutoSave() {
   hasUnsavedChanges = true;
   statusBox.textContent = 'Cambios detectados...';
-  
+
   if (autoSaveTimer) clearTimeout(autoSaveTimer);
-  
+
   autoSaveTimer = setTimeout(() => {
     if (hasUnsavedChanges) {
       saveAppState();
@@ -1966,10 +2090,10 @@ function scheduleAutoSave() {
 function loadTemplate(templateName) {
   const template = TEMPLATES[templateName];
   if (!template) return;
-  
+
   state.selectedReports = new Set();
   Object.keys(state.selectedSections).forEach(k => state.selectedSections[k] = new Set());
-  
+
   template.reports.forEach(reportId => {
     state.selectedReports.add(reportId);
     if (template.sections[reportId]) {
@@ -1978,31 +2102,35 @@ function loadTemplate(templateName) {
       });
     }
   });
-  
+
   renderAll();
   statusBox.textContent = `Plantilla "${templateName}" cargada`;
 }
+// Exponer al ámbito global
+window.loadTemplate = loadTemplate;
 
 // Función para guardar como plantilla
 function saveAsTemplate() {
   const templateName = prompt('Nombre para la nueva plantilla:');
   if (!templateName) return;
-  
+
   const template = {
     reports: Array.from(state.selectedReports),
     sections: {}
   };
-  
+
   state.selectedReports.forEach(reportId => {
     template.sections[reportId] = Array.from(state.selectedSections[reportId]);
   });
-  
+
   const savedTemplates = JSON.parse(localStorage.getItem('customTemplates') || '{}');
   savedTemplates[templateName] = template;
   localStorage.setItem('customTemplates', JSON.stringify(savedTemplates));
-  
+
   statusBox.textContent = `Plantilla "${templateName}" guardada`;
 }
+// Exponer al ámbito global
+window.saveAsTemplate = saveAsTemplate;
 
 // ===============================================
 // FUNCIONES DE MODALES
@@ -2012,6 +2140,8 @@ function saveAsTemplate() {
 function openModal(modalId) {
   document.getElementById(modalId).classList.add('active');
 }
+// Exponer al ámbito global
+window.openModal = openModal;
 
 // Función para cerrar modal
 function closeModal(modalId) {
@@ -2020,6 +2150,8 @@ function closeModal(modalId) {
   modal.querySelectorAll('input[type="text"], textarea, select').forEach(el => el.value = '');
   modal.querySelectorAll('[id^="message"]').forEach(el => el.innerHTML = '');
 }
+// Exponer al ámbito global
+window.closeModal = closeModal;
 
 // Event listeners para modales
 document.querySelectorAll('.modal-overlay').forEach(modal => {
@@ -2062,11 +2194,13 @@ function addSectionField(containerId) {
     <div class="param-options">
       <div style="font-size: 12px; font-weight: 600; color: #0b3954; margin-bottom: 8px;">Parámetros de esta sección:</div>
       <div class="params-list"></div>
-      <button type="button" onclick="addParamField(this.closest('.param-options'))" class="btn-add-section" style="margin-top: 8px; font-size: 12px; padding: 8px 12px;">+ Parámetro</button>
+      <button type="button" onclick="window.addParamField(this.closest('.param-options'))" class="btn-add-section" style="margin-top: 8px; font-size: 12px; padding: 8px 12px;">+ Parámetro</button>
     </div>
   `;
   container.appendChild(sectionDiv);
 }
+// Exponer al ámbito global
+window.addSectionField = addSectionField;
 
 // Función para añadir campo de parámetro
 function addParamField(container) {
@@ -2081,6 +2215,8 @@ function addParamField(container) {
   `;
   paramsList.appendChild(paramDiv);
 }
+// Exponer al ámbito global
+window.addParamField = addParamField;
 
 // Función para manejar añadir informe
 function handleAddReport(event) {
@@ -2159,6 +2295,8 @@ function loadUpdateReportOptions() {
     select.appendChild(option);
   });
 }
+// Exponer al ámbito global
+window.loadUpdateReportOptions = loadUpdateReportOptions;
 
 // Función para alternar campos de actualización
 function toggleUpdateFields() {
@@ -2329,6 +2467,8 @@ function loadDeleteReportOptions() {
     select.appendChild(option);
   });
 }
+// Exponer al ámbito global
+window.loadDeleteReportOptions = loadDeleteReportOptions;
 
 // Función para alternar campos de eliminación
 function toggleDeleteFields() {
@@ -2455,6 +2595,8 @@ function handleLogin(event) {
     error.textContent = 'Usuario o contraseña incorrectos.';
   }
 }
+// Exponer al ámbito global
+window.handleLogin = handleLogin;
 
 // Función para mostrar/ocultar contraseña
 function togglePassword() {
@@ -2462,6 +2604,8 @@ function togglePassword() {
   const isPassword = input.type === 'password';
   input.type = isPassword ? 'text' : 'password';
 }
+// Exponer al ámbito global
+window.togglePassword = togglePassword;
 
 // Función para cerrar sesión
 document.getElementById('btnLogout').addEventListener('click', () => {
@@ -2510,6 +2654,8 @@ function intentarDesbloqueo() {
     error.textContent = 'Clave incorrecta.';
   }
 }
+// Exponer al ámbito global
+window.intentarDesbloqueo = intentarDesbloqueo;
 
 // ===============================================
 // INICIALIZACIÓN
@@ -2600,13 +2746,13 @@ document.addEventListener('input', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     const focusedElement = document.activeElement;
-    if (focusedElement.classList.contains('report-card') || 
-        focusedElement.classList.contains('accordion-header-report') ||
-        focusedElement.classList.contains('sect-item-accordion')) {
+    if (focusedElement.classList.contains('report-card') ||
+      focusedElement.classList.contains('accordion-header-report') ||
+      focusedElement.classList.contains('sect-item-accordion')) {
       focusedElement.click();
     }
   }
-  
+
   if (e.key === 'Escape') {
     document.querySelectorAll('.modal-overlay.active').forEach(modal => {
       modal.classList.remove('active');
@@ -2631,10 +2777,10 @@ document.querySelectorAll('input[type="text"], textarea').forEach(input => {
 // Inicialización cuando el DOM está cargado
 document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('p_fecha').valueAsDate = new Date();
-  
+
   // Cargar estado guardado
   loadAppState();
-  
+
   // Renderizar interfaz
   renderAll();
 
@@ -2647,19 +2793,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (updateReportSelect) {
     updateReportSelect.addEventListener('change', toggleUpdateFields);
   }
-  
+
   if (updateMode) {
     updateMode.addEventListener('change', toggleUpdateFields);
   }
-  
+
   if (deleteReportSelect) {
     deleteReportSelect.addEventListener('change', toggleDeleteFields);
   }
-  
+
   if (deleteMode) {
     deleteMode.addEventListener('change', toggleDeleteFields);
   }
-  
+
   // Verificar estado de bloqueo del sistema
   const bloqueado = localStorage.getItem(APP_CONFIG.CLAVE_BLOQUEO) === "true";
   const inicio = localStorage.getItem(APP_CONFIG.CLAVE_INICIO);
@@ -2678,3 +2824,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 });
+
+// ===============================================
+// EXPORTACIONES GLOBALES PARA GITHUB PAGES
+// ===============================================
+// Exponer funciones críticas al ámbito global para compatibilidad con GitHub Pages
+window.handleAddReport = handleAddReport;
+window.handleUpdateReport = handleUpdateReport;
+window.handleDeleteReport = handleDeleteReport;
+window.toggleUpdateFields = toggleUpdateFields;
+window.toggleDeleteFields = toggleDeleteFields;
+
